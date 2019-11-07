@@ -11,24 +11,12 @@
         android:id="@+id/login_button"
         android:layout_width="167dp"
         android:layout_height="65dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="25dp"
         android:text="Login"
         app:layout_constraintBottom_toTopOf="@+id/signup_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome to Dress.me"
-        android:textColor="#E91E63"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/login_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/signup_button"
