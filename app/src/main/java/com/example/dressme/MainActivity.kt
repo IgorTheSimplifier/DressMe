@@ -14,12 +14,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        login_button.setOnClickListener{
+        login_button_main.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent);
         }
 
-        signup_button.setOnClickListener{
+        signup_button_main.setOnClickListener{
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent);
         }

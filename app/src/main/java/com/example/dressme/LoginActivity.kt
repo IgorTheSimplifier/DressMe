@@ -14,7 +14,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        login_button.setOnClickListener{
+        login_button_login.setOnClickListener{
             performLogin();
         }
     }
@@ -23,8 +23,8 @@ class LoginActivity : AppCompatActivity() {
     private fun performLogin() {
         if (!valid()) return
 
-        val email       = email_edittext.text.toString()
-        val password    = password_edittext.text.toString()
+        val email       = email_edittext_login.text.toString()
+        val password    = password_edittext_login.text.toString()
 
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
             .addOnCompleteListener {
@@ -40,8 +40,8 @@ class LoginActivity : AppCompatActivity() {
 
 
     private fun valid(): Boolean {
-        val email       = email_edittext.text.toString()
-        val password    = password_edittext.text.toString()
+        val email       = email_edittext_login.text.toString()
+        val password    = password_edittext_login.text.toString()
 
         Log.d(TAG, "Email is  $email")
         Log.d(TAG, "Password is  $password")
