@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "393583902479",
+    "firebase_url": "https://dressme-30711.firebaseio.com",
+    "project_id": "dressme-30711",
+    "storage_bucket": "dressme-30711.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393583902479:android:0817907dba22869b3d487a",
+        "android_client_info": {
+          "package_name": "com.example.dressme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "393583902479-qufrv67a62ba6f5lnsc472otlfm81850.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYa8Nkjdf8r7TRmJMMYmSGMCAIlnhBiHw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "393583902479-qufrv67a62ba6f5lnsc472otlfm81850.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
