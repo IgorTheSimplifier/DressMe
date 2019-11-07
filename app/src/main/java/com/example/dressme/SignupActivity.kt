@@ -26,9 +26,9 @@ class SignupActivity : AppCompatActivity() {
         setContentView(com.example.dressme.R.layout.activity_signup)
 
         _nameText = findViewById(R.id.input_name) as EditText
-        _addressText = findViewById(R.id.input_address) as EditText
+        //_addressText = findViewById(R.id.input_address) as EditText
         _emailText = findViewById(R.id.input_email) as EditText
-        _mobileText = findViewById(R.id.input_mobile) as EditText
+        //_mobileText = findViewById(R.id.input_mobile) as EditText
         _passwordText = findViewById(R.id.input_password) as EditText
         _reEnterPasswordText = findViewById(R.id.input_reEnterPassword) as EditText
 
