@@ -2,7 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:background="@drawable/loginbackground2">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +35,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            android:textColor="#D4DADF"
+            android:textColorHint="#D4DADF">
 
             <EditText
                 android:id="@+id/input_name"
@@ -49,14 +52,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            android:textColor="#D4DADF"
+            android:textColorHint="#D4DADF">
 
             <EditText
                 android:id="@+id/input_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Address"
-                android:inputType="textPostalAddress" />
+                android:inputType="textPostalAddress"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -65,7 +71,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            android:textColor="#D4DADF"
+            android:textColorHint="#D4DADF">
 
             <EditText
                 android:id="@+id/input_email"
@@ -81,7 +89,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            android:textColor="#D4DADF"
+            android:textColorHint="#D4DADF">
 
             <EditText
                 android:id="@+id/input_mobile"
@@ -96,7 +106,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            android:textColor="#D4DADF"
+            android:textColorHint="#D4DADF">
 
             <EditText
                 android:id="@+id/input_password"
@@ -111,7 +123,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            android:textColor="#D4DADF"
+            android:textColorHint="#D4DADF">
 
             <EditText
                 android:id="@+id/input_reEnterPassword"
@@ -138,7 +152,9 @@
             android:layout_marginBottom="24dp"
             android:gravity="center"
             android:text="Already a member? Login"
-            android:textSize="16dip" />
+            android:textSize="16dip"
+            android:textColor="#D4DADF"
+            android:textColorHint="#D4DADF"/>
 
     </LinearLayout>
 </ScrollView>
