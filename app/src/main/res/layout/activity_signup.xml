@@ -9,9 +9,9 @@
 
     <EditText
         android:id="@+id/name_edittext_signup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_width="332dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="#D4DADF"
         android:hint="Name"
         android:inputType="textPersonName"
@@ -19,13 +19,13 @@
         android:textColorHint="#D4DADF"
         app:layout_constraintBottom_toTopOf="@+id/email_edittext_signup"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/email_edittext_signup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="333dp"
+        android:layout_height="47dp"
         android:backgroundTint="#D4DADF"
         android:hint="Email"
         android:inputType="textEmailAddress"
@@ -33,14 +33,13 @@
         android:textColorHint="#D4DADF"
         app:layout_constraintBottom_toTopOf="@+id/password_edittext_signup"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/password_edittext_signup"
-        android:layout_width="400dp"
+        android:layout_width="334dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="12dp"
         android:backgroundTint="#D4DADF"
         android:hint="Password"
         android:inputType="textPassword"
@@ -48,14 +47,14 @@
         android:textColorHint="#D4DADF"
         app:layout_constraintBottom_toTopOf="@+id/password_reenter_edittext_signup"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/password_reenter_edittext_signup"
-        android:layout_width="407dp"
-        android:layout_height="49dp"
-        android:layout_marginBottom="84dp"
+        android:layout_width="334dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="68dp"
         android:backgroundTint="#D4DADF"
         android:hint="Re-enter Password"
         android:inputType="textPassword"
@@ -63,7 +62,7 @@
         android:textColorHint="#D4DADF"
         app:layout_constraintBottom_toTopOf="@+id/signup_button_signup"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -77,7 +76,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <TextView
         android:id="@+id/login_button_signup"
         android:layout_width="399dp"
         android:layout_height="21dp"
