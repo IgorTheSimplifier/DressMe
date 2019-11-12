@@ -1,5 +1,6 @@
 package com.example.dressme
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -32,6 +33,8 @@ class LoginActivity : AppCompatActivity() {
 
                 // else if successful
                 Log.d(TAG, "Successfully logged in ${it.result?.user?.uid}")
+                val intent = Intent(this, ProfileMainActivity::class.java)
+                startActivity(intent);
             }
             .addOnFailureListener {
                 Log.d(TAG, "Failed to login ${it.message}")
