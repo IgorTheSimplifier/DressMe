@@ -39,6 +39,9 @@ class SignupActivity : AppCompatActivity() {
                 if (!it.isSuccessful) return@addOnCompleteListener
 
                 Log.d(TAG, "Signup has succeeded ${it.result?.user?.uid}")
+
+                val intent = Intent(this, ProfileMainActivity::class.java)
+                startActivity(intent);
             }
             .addOnFailureListener {
                 Log.d(TAG, "Signup has failed ${it.message}")
