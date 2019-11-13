@@ -13,38 +13,37 @@ import androidx.lifecycle.Observer
 import com.example.dressme.LoginActivity
 import com.example.dressme.R
 import com.example.dressme.ui.search.SearchViewModel
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 
 class ProfileFragment : Fragment() {
 
+    private val TAG: String = "ProfileFragment"
+
     private lateinit var profileViewModel: ProfileViewModel
 
     override fun onCreateView(
-
-
-
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        profileViewModel =
-            ViewModelProviders.of(this).get(ProfileViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_profile, container, false)
-        //val textView: TextView = root.findViewById(R.id.text_profile)
+
+        profileViewModel    = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
+        val root            = inflater.inflate(R.layout.fragment_profile, container, false)
         profileViewModel.text.observe(this, Observer {
-            //textView.text = it
 
         })
 
-        root.logout_button.setOnClickListener { root ->
-
-
+        root.logout_button.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            Log.d(TAG, "Successfully logged out")
             val intent = Intent(context, LoginActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or
+                                Intent.FLAG_ACTIVITY_NEW_TASK or
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
-            //Change something here
 
         }
 
