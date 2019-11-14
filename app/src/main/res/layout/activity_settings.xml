@@ -2,42 +2,27 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/loginbackground2"
-    android:fitsSystemWindows="true">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity">
 
     <EditText
-        android:id="@+id/name_edittext_signup"
+        android:id="@+id/name_edittext_settings"
         android:layout_width="332dp"
         android:layout_height="43dp"
-        android:layout_marginBottom="8dp"
         android:backgroundTint="#D4DADF"
         android:hint="Name"
         android:inputType="textPersonName"
         android:textColor="#D4DADF"
         android:textColorHint="#D4DADF"
-        app:layout_constraintBottom_toTopOf="@+id/email_edittext_signup"
+        app:layout_constraintBottom_toTopOf="@+id/password_edittext_settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/email_edittext_signup"
-        android:layout_width="333dp"
-        android:layout_height="47dp"
-        android:backgroundTint="#D4DADF"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:textColor="#D4DADF"
-        android:textColorHint="#D4DADF"
-        app:layout_constraintBottom_toTopOf="@+id/password_edittext_signup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.474"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/password_edittext_signup"
+        android:id="@+id/password_edittext_settings"
         android:layout_width="334dp"
         android:layout_height="48dp"
         android:backgroundTint="#D4DADF"
@@ -45,13 +30,13 @@
         android:inputType="textPassword"
         android:textColor="#D4DADF"
         android:textColorHint="#D4DADF"
-        app:layout_constraintBottom_toTopOf="@+id/password_reenter_edittext_signup"
+        app:layout_constraintBottom_toTopOf="@+id/password_reenter_edittext_settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/password_reenter_edittext_signup"
+        android:id="@+id/password_reenter_edittext_settings"
         android:layout_width="334dp"
         android:layout_height="48dp"
         android:layout_marginBottom="68dp"
@@ -60,37 +45,30 @@
         android:inputType="textPassword"
         android:textColor="#D4DADF"
         android:textColorHint="#D4DADF"
-        app:layout_constraintBottom_toTopOf="@+id/confirm_button_setting"
+        app:layout_constraintBottom_toTopOf="@+id/confirm_button_settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/confirm_button_setting"
+        android:id="@+id/confirm_button_settings"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="228dp"
         android:padding="12dp"
-        android:text="Create Account"
-        app:layout_constraintBottom_toTopOf="@+id/login_button_signup"
+        android:text="Confirm"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/login_button_signup"
-        android:layout_width="399dp"
-        android:layout_height="21dp"
-        android:layout_marginBottom="208dp"
-        android:backgroundTint="#D4DADF"
-        android:gravity="center"
-        android:text="Already a member? Login"
-        android:textColor="#D4DADF"
-        android:textColorHint="#D4DADF"
-        android:textSize="16dip"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="208dp"
+        android:text="Update your information"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -64,7 +64,7 @@
         android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"/>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/settings_button"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="388dp"
         android:layout_height="44dp"
@@ -81,7 +81,7 @@
         android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"/>
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/about_button_profile"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="388dp"
         android:layout_height="44dp"
@@ -95,7 +95,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/settings_button" />
 
     <Button
         android:id="@+id/logout_button"

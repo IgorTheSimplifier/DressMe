@@ -1,6 +1,5 @@
 package com.example.dressme
 
-import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,7 +15,7 @@ class SignupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
-        signup_button_signup.setOnClickListener {
+        confirm_button_setting.setOnClickListener {
             performSignup()
         }
 
