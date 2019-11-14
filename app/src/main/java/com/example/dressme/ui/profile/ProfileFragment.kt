@@ -10,8 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
+import com.example.dressme.AboutActivity
 import com.example.dressme.LoginActivity
 import com.example.dressme.R
+import com.example.dressme.SettingsActivity
 import com.example.dressme.ui.search.SearchViewModel
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -43,8 +45,20 @@ class ProfileFragment : Fragment() {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or
                                 Intent.FLAG_ACTIVITY_NEW_TASK or
                                 Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            activity?.finish() //To "Destroy" The activity
             startActivity(intent)
 
+        }
+
+        root.settings_button.setOnClickListener {
+            val intent = Intent(context, SettingsActivity::class.java)
+            startActivity(intent)
+
+        }
+
+        root.about_button_profile.setOnClickListener {
+            val intent = Intent(context, AboutActivity::class.java)
+            startActivity(intent)
         }
 
         return root
