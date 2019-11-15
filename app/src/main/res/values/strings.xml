@@ -14,4 +14,11 @@
     <string name="title_add">Add</string>
     <string name="title_search">Search</string>
     <string name="title_profile">Profile</string>
+    <string name="itemImage">Image of the item</string>
+    <string name="size_condition">Size - condition</string>
+    <string name="product_name">Product name</string>
+    <string name="price">Price</string>
+    <string name="productDescription">Description</string>
+    <string name="buyNow">Buy now</string>
+    <string name="contactSeller">Contact seller</string>
 </resources>
