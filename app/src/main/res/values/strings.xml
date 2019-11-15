@@ -21,4 +21,6 @@
     <string name="productDescription">Description</string>
     <string name="buyNow">Buy now</string>
     <string name="contactSeller">Contact seller</string>
+    <string name="ciara">Ciara Delavigne</string>
+    <string name="back">BACK</string>
 </resources>
