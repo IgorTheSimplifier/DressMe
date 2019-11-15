@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.dressme.R
+import com.example.dressme.SignupActivity
 import com.example.dressme.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -48,23 +49,43 @@ class AddFragment : Fragment() {
             return
         }
 
-        val name       = title_edittext_add.text.toString()
+        val name        = title_edittext_add.text.toString()
         val desc_text   = item_desc_edittext_add.text.toString()
         // $todo: take a look
-        val user_owner_id = FirebaseAuth.getInstance().uid ?: ""
-        val owner_user: OwnerUser = OwnerUser(user_owner_id)
+        val user_owner_id           = FirebaseAuth.getInstance().uid ?: ""
+        var user: User? = null
 
-        val item: Item = Item(name, desc_text, owner_user)
+        FirebaseFirestore.getInstance()
+            .collection("users")
+            .document(user_owner_id)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    Log.d(TAG, "DocumentSnapshot data: ${document.data}")
+                    user = document.toObject(User::class.java)
+                    Log.d(TAG, "Successfully desserealised")
+                    
+                    val ownerUserName = user?.name ?: ""
+                    val ownerUser: OwnerUser   = OwnerUser(user_owner_id, ownerUserName)
+                    val item: Item = Item(name, desc_text, ownerUser)
 
-        val ref = FirebaseFirestore.getInstance().collection("items")
-        ref.add(item)
-            .addOnSuccessListener {
-                Log.d(TAG, "item has been saved to Firebase Database")
-                title_edittext_add.text.clear()
-                item_desc_edittext_add.text.clear()
+                    val ref = FirebaseFirestore.getInstance().collection("items")
+                    ref.add(item)
+                        .addOnSuccessListener {
+                            Log.d(TAG, "item has been saved to Firebase Database")
+                            clearForm()
+                        }
+                        .addOnFailureListener {
+                            Log.d(TAG, "Fail to save item")
+                        }
+
+
+                } else {
+                    Log.d(TAG, "No such document")
+                }
             }
-            .addOnFailureListener {
-                Log.d(TAG, "Fail to save item")
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "get failed with ", exception)
             }
     }
 
@@ -78,9 +99,18 @@ class AddFragment : Fragment() {
             return false
         return true
     }
+
+
+    private fun clearForm() {
+        title_edittext_add.text.clear()
+        item_desc_edittext_add.text.clear()
+    }
 }
 
 
-class Item(val name: String, val desc_text: String, val owner_user: OwnerUser)
+data class Item(val name: String            = "",
+                val desc_text: String       = "",
+                val owner_user: OwnerUser   ?= null)
 
-class OwnerUser(val user_id: String)
+data class OwnerUser(val user_id: String = "",
+                     val name: String = "")
