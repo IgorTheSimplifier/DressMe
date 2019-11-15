@@ -40,7 +40,7 @@ class SignupActivity : AppCompatActivity() {
                 if (!it.isSuccessful) return@addOnCompleteListener
 
                 Log.d(TAG, "Signup has succeeded ${it.result?.user?.uid}")
-                saveUserToFirebaseDatabase()
+                saveUserToFirebaseFirestore()
 
                 val intent = Intent(this, ProfileMainActivity::class.java)
                 startActivity(intent);
@@ -51,7 +51,7 @@ class SignupActivity : AppCompatActivity() {
     }
 
 
-    private fun saveUserToFirebaseDatabase() {
+    private fun saveUserToFirebaseFirestore() {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref = FirebaseFirestore.getInstance().collection("users")
 
