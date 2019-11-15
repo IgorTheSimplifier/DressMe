@@ -1,5 +1,6 @@
 package com.example.dressme.ui.add
 
+import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,10 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.dressme.R
-import com.example.dressme.SignupActivity
 import com.example.dressme.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_add.view.*
 
@@ -51,41 +52,33 @@ class AddFragment : Fragment() {
 
         val name        = title_edittext_add.text.toString()
         val desc_text   = item_desc_edittext_add.text.toString()
-        // $todo: take a look
-        val user_owner_id           = FirebaseAuth.getInstance().uid ?: ""
-        var user: User? = null
+        // $todo: take a look at edge case
+        val user_owner_id       = FirebaseAuth.getInstance().uid ?: ""
+        val db = FirebaseFirestore.getInstance()
 
-        FirebaseFirestore.getInstance()
-            .collection("users")
-            .document(user_owner_id)
-            .get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    Log.d(TAG, "DocumentSnapshot data: ${document.data}")
-                    user = document.toObject(User::class.java)
-                    Log.d(TAG, "Successfully desserealised")
-                    
-                    val ownerUserName = user?.name ?: ""
-                    val ownerUser: OwnerUser   = OwnerUser(user_owner_id, ownerUserName)
-                    val item: Item = Item(name, desc_text, ownerUser)
+        db.runTransaction { transaction ->
+            Log.d(TAG, "Add item transaction beggins")
+            val snapshot    = transaction.get(db.collection("users").document(user_owner_id))
+            var user: User? = snapshot.toObject(User::class.java)
+            Log.d(TAG, "Successfully desserealised")
 
-                    val ref = FirebaseFirestore.getInstance().collection("items")
-                    ref.add(item)
-                        .addOnSuccessListener {
-                            Log.d(TAG, "item has been saved to Firebase Database")
-                            clearForm()
-                        }
-                        .addOnFailureListener {
-                            Log.d(TAG, "Fail to save item")
-                        }
+            val ownerUserName           = user?.name ?: ""
+            val ownerUser: OwnerUser    = OwnerUser(user_owner_id, ownerUserName)
+            val item: Item              = Item(name, desc_text, ownerUser)
 
+            val newItemRef = db.collection("items").document()
 
-                } else {
-                    Log.d(TAG, "No such document")
-                }
+            transaction.set(newItemRef, item)
+            // Kostil
+            transaction.update(db.collection("users").document(user_owner_id)
+                , "name"
+                , ownerUserName)
+        }
+            .addOnSuccessListener {
+                Log.d(TAG, "Add item transaction went successfully")
             }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "get failed with ", exception)
+            .addOnFailureListener {
+                Log.d(TAG, "Add item transaction failed with erre ${it.message}")
             }
     }
 
@@ -108,9 +101,9 @@ class AddFragment : Fragment() {
 }
 
 
-data class Item(val name: String            = "",
-                val desc_text: String       = "",
+data class Item(val name: String            =  "",
+                val desc_text: String       =  "",
                 val owner_user: OwnerUser   ?= null)
 
-data class OwnerUser(val user_id: String = "",
-                     val name: String = "")
+data class OwnerUser(val user_id: String    = "",
+                     val name: String       = "")
