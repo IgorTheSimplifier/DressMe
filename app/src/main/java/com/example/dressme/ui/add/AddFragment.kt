@@ -1,6 +1,9 @@
 package com.example.dressme.ui.add
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +23,13 @@ class AddFragment : Fragment() {
 
     private val TAG: String = "AddFragment"
 
+    companion object {
+        //image pick code
+        private val IMAGE_PICK_CODE = 1000;
+        //Permission code
+        private val PERMISSION_CODE = 1001;
+    }
+
     private lateinit var addViewModel: AddViewModel
 
     override fun onCreateView(
@@ -37,6 +47,10 @@ class AddFragment : Fragment() {
             confirm()
         }
 
+        root.add_img_button_add.setOnClickListener {
+            selectImageFromGalery()
+        }
+
         return root
     }
 
@@ -51,8 +65,8 @@ class AddFragment : Fragment() {
         val name        = title_edittext_add.text.toString()
         val desc_text   = item_desc_edittext_add.text.toString()
         // $todo: take a look at edge case
-        val user_owner_id       = FirebaseAuth.getInstance().uid ?: ""
-        val db = FirebaseFirestore.getInstance()
+        val user_owner_id   = FirebaseAuth.getInstance().uid ?: ""
+        val db              = FirebaseFirestore.getInstance()
 
         db.runTransaction { transaction ->
             Log.d(TAG, "Add item transaction beggins")
@@ -74,10 +88,35 @@ class AddFragment : Fragment() {
         }
             .addOnSuccessListener {
                 Log.d(TAG, "Add item transaction went successfully")
+                clearForm()
             }
             .addOnFailureListener {
                 Log.d(TAG, "Add item transaction failed with erre ${it.message}")
             }
+    }
+
+
+    private fun selectImageFromGalery() {
+        Log.d( TAG, "selecting image")
+
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_PICK_CODE)
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == IMAGE_PICK_CODE
+            && resultCode == Activity.RESULT_OK
+            && data != null)
+        {
+            Log.d(TAG, "Photo was sellected")
+
+            image_view_add.setImageURI(data?.data)
+        }
+
     }
 
 
@@ -95,6 +134,7 @@ class AddFragment : Fragment() {
     private fun clearForm() {
         title_edittext_add.text.clear()
         item_desc_edittext_add.text.clear()
+        image_view_add.setImageResource(0)
     }
 }
 
