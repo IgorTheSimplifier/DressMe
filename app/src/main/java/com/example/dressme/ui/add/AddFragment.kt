@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.dressme.FirebaseWrapper
 import com.example.dressme.R
 import com.example.dressme.User
 import com.google.firebase.auth.FirebaseAuth
@@ -64,81 +65,10 @@ class AddFragment : Fragment() {
             return
         }
 
-        uploadItem()
-    }
-
-    // $todo: add loading view
-    // $todo: fix: change fragment when uploading will crash user session
-    private fun uploadItem() {
-        if (selectedPhotoUri == null) return
-
-        Log.d(TAG, "Uploading photo")
-
-        val filename    = UUID.randomUUID().toString()
-        val ref         = FirebaseStorage.getInstance().getReference("/images/$filename")
-
-        // Uploading photo first
-        ref.putFile(selectedPhotoUri!!)
-            .addOnSuccessListener {
-                Log.d(TAG, "File has been uploaded ${it.metadata?.path}")
-
-                // If upload succeedded upload item as a transaction
-                ref.downloadUrl.addOnSuccessListener {
-                    Log.d(TAG, "Photo download link is in here")
-                    uploadItemTransaction(it.toString())
-                }
-            }
-            .addOnFailureListener {
-                Log.d(TAG, "Uploading has failed to upload with exception ${it.toString()}")
-            }
-            .addOnCanceledListener {
-                Log.d(TAG, "Uploading has been interrupted to upload with exception")
-            }
-    }
-
-    private fun uploadItemTransaction(itemImageUri: String) {
-        Log.d(TAG, "Uploading item to Firestore")
-
         val name: String        = title_edittext_add.text.toString()
         val descText: String    = item_desc_edittext_add.text.toString()
-        val userOwnerId         = FirebaseAuth.getInstance().uid ?: ""
-        val db                  = FirebaseFirestore.getInstance()
-
-        if (userOwnerId == "") {
-            Log.d(TAG, "[Error] User Owner ID is null")
-            return
-        }
-
-        db.runTransaction { transaction ->
-            Log.d(TAG, "Add item transaction start")
-
-            val snapshot    = transaction
-                .get(db.collection("users")
-                .document(userOwnerId))
-            var user: User? = snapshot.toObject(User::class.java)
-            Log.d(TAG, "User Successfully desserealised")
-
-            val ownerUserName           = user?.name ?: ""
-            val ownerUser: OwnerUser    = OwnerUser(userOwnerId, ownerUserName)
-
-            val item: Item              = Item(name, descText, itemImageUri, ownerUser)
-
-            val newItemRef = db.collection("items").document()
-
-            transaction.set(newItemRef, item)
-            transaction.update(
-                db.collection("users").document(userOwnerId)
-                , "name"
-                , ownerUserName
-            )
-        }
-            .addOnSuccessListener {
-                Log.d(TAG, "Add item transaction went successfully")
-                cleanup()
-            }
-            .addOnFailureListener {
-                Log.d(TAG, "Add item transaction failed with error ${it.message}")
-            }
+        FirebaseWrapper.uploadItem(TAG, selectedPhotoUri, name, descText)
+        cleanup()
     }
 
 
@@ -181,12 +111,3 @@ class AddFragment : Fragment() {
         image_view_add.setImageResource(0)
     }
 }
-
-
-data class Item(val name: String            =  "",
-                val desc_text: String       =  "",
-                val item_image_uri: String  ?= null,
-                val owner_user: OwnerUser   ?= null)
-
-data class OwnerUser(val user_id: String    = "",
-                     val name: String       = "")
