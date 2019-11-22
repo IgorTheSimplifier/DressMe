@@ -32,5 +32,11 @@
 
     <!-- Temporary strings (testing) TODO remove -->
     <string name="test_user">Ciara Delavigne</string>
+    <string name="hint_confirm_password">Confirm password</string>
+    <string name="hint_password" />
+    <string name="hint_email">Email</string>
+    <string name="hint_name">Name</string>
+    <string name="create_account">Create Account</string>
+    <string name="already_member">Already a member? Login here</string>
 
 </resources>
