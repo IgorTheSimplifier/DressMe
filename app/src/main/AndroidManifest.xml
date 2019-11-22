@@ -4,28 +4,51 @@
 
     <application
         android:allowBackup="true"
-        android:label="@string/app_name"
+        android:label="@string/label_home"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ItemViewActivity"></activity>
-        <activity android:name=".AboutActivity" />
-        <activity
-            android:name=".SettingsActivity"
-            android:label="Settings" />
-        <activity
-            android:name=".ProfileMainActivity"
-            android:label="@string/title_activity_profile_main" />
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".LoginActivity" />
+
+
+        <!-- Pre App Activities -->
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/label_home"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".SignupActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
+
+
+
+        <!-- Profile, browsing and e-commerce -->
+        <activity
+            android:name=".ItemViewActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".AboutActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/label_settings"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ProfileMainActivity"
+            android:label="@string/label_profile_main"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

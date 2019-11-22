@@ -62,8 +62,9 @@ class AddFragment : Fragment() {
             return
         }
 
-        val name        = title_edittext_add.text.toString()
-        val desc_text   = item_desc_edittext_add.text.toString()
+        val name : String = title_edittext_add.text.toString()
+        val desc_text : String = item_desc_edittext_add.text.toString()
+
         // $todo: take a look at edge case
         val user_owner_id   = FirebaseAuth.getInstance().uid ?: ""
         val db              = FirebaseFirestore.getInstance()
