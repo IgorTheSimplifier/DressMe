@@ -19,6 +19,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <activity
@@ -33,7 +34,7 @@
 
         <!-- Profile, browsing and e-commerce -->
         <activity
-            android:name=".ItemViewActivity"
+            android:name=".InspectItemActivity"
             android:screenOrientation="portrait" />
 
         <activity
@@ -48,7 +49,9 @@
         <activity
             android:name=".ProfileMainActivity"
             android:label="@string/label_profile_main"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>

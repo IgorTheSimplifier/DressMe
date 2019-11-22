@@ -8,18 +8,27 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="SuperStyle">
         <item name="android:layout_marginTop">@dimen/layout_margin</item>
         <item name="android:textSize">@dimen/text_size</item>
+    </style>
+
+
+    <style name="DressMe">
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="android:colorButtonNormal">@color/colorForeground</item>
+        <item name="android:colorActivatedHighlight">@color/colorAccentOne</item>
+        <item name="android:textColor">@color/colorAccentTwo</item>
+        <item name="android:colorAccent">@color/colorAccentThree</item>
     </style>
 
 </resources>
