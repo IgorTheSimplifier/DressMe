@@ -101,3 +101,5 @@ lint/tmp/
 
 # firebase
 app/google-services.json
+
+design/~$db_prototype.xlsx
