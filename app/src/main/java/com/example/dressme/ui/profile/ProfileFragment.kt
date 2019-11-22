@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 
-class companioProfileFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
     private val TAG: String = "ProfileFragment"
 
