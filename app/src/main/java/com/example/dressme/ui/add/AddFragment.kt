@@ -2,6 +2,7 @@ package com.example.dressme.ui.add
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -15,9 +16,12 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.dressme.R
 import com.example.dressme.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_add.view.*
+import java.util.*
 
 class AddFragment : Fragment() {
 
@@ -26,8 +30,6 @@ class AddFragment : Fragment() {
     companion object {
         //image pick code
         private val IMAGE_PICK_CODE = 1000;
-        //Permission code
-        private val PERMISSION_CODE = 1001;
     }
 
     private lateinit var addViewModel: AddViewModel
@@ -62,49 +64,93 @@ class AddFragment : Fragment() {
             return
         }
 
-        val name : String = title_edittext_add.text.toString()
-        val desc_text : String = item_desc_edittext_add.text.toString()
+        uploadItem()
+    }
 
-        // $todo: take a look at edge case
-        val user_owner_id   = FirebaseAuth.getInstance().uid ?: ""
-        val db              = FirebaseFirestore.getInstance()
+    // $todo: add loading view
+    // $todo: fix: change fragment when uploading will crash user session
+    private fun uploadItem() {
+        if (selectedPhotoUri == null) return
+
+        Log.d(TAG, "Uploading photo")
+
+        val filename    = UUID.randomUUID().toString()
+        val ref         = FirebaseStorage.getInstance().getReference("/images/$filename")
+
+        // Uploading photo first
+        ref.putFile(selectedPhotoUri!!)
+            .addOnSuccessListener {
+                Log.d(TAG, "File has been uploaded ${it.metadata?.path}")
+
+                // If upload succeedded upload item as a transaction
+                ref.downloadUrl.addOnSuccessListener {
+                    Log.d(TAG, "Photo download link is in here")
+                    uploadItemTransaction(it.toString())
+                }
+            }
+            .addOnFailureListener {
+                Log.d(TAG, "Uploading has failed to upload with exception ${it.toString()}")
+            }
+            .addOnCanceledListener {
+                Log.d(TAG, "Uploading has been interrupted to upload with exception")
+            }
+    }
+
+    private fun uploadItemTransaction(itemImageUri: String) {
+        Log.d(TAG, "Uploading item to Firestore")
+
+        val name: String        = title_edittext_add.text.toString()
+        val descText: String    = item_desc_edittext_add.text.toString()
+        val userOwnerId         = FirebaseAuth.getInstance().uid ?: ""
+        val db                  = FirebaseFirestore.getInstance()
+
+        if (userOwnerId == "") {
+            Log.d(TAG, "[Error] User Owner ID is null")
+            return
+        }
 
         db.runTransaction { transaction ->
-            Log.d(TAG, "Add item transaction beggins")
-            val snapshot    = transaction.get(db.collection("users").document(user_owner_id))
+            Log.d(TAG, "Add item transaction start")
+
+            val snapshot    = transaction
+                .get(db.collection("users")
+                .document(userOwnerId))
             var user: User? = snapshot.toObject(User::class.java)
-            Log.d(TAG, "Successfully desserealised")
+            Log.d(TAG, "User Successfully desserealised")
 
             val ownerUserName           = user?.name ?: ""
-            val ownerUser: OwnerUser    = OwnerUser(user_owner_id, ownerUserName)
-            val item: Item              = Item(name, desc_text, ownerUser)
+            val ownerUser: OwnerUser    = OwnerUser(userOwnerId, ownerUserName)
+
+            val item: Item              = Item(name, descText, itemImageUri, ownerUser)
 
             val newItemRef = db.collection("items").document()
 
             transaction.set(newItemRef, item)
-            // Kostil
-            transaction.update(db.collection("users").document(user_owner_id)
+            transaction.update(
+                db.collection("users").document(userOwnerId)
                 , "name"
-                , ownerUserName)
+                , ownerUserName
+            )
         }
             .addOnSuccessListener {
                 Log.d(TAG, "Add item transaction went successfully")
-                clearForm()
+                cleanup()
             }
             .addOnFailureListener {
-                Log.d(TAG, "Add item transaction failed with erre ${it.message}")
+                Log.d(TAG, "Add item transaction failed with error ${it.message}")
             }
     }
 
 
+    var selectedPhotoUri: Uri? = null
+
     private fun selectImageFromGalery() {
-        Log.d( TAG, "selecting image")
+        Log.d( TAG, "Selecting image")
 
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         startActivityForResult(intent, IMAGE_PICK_CODE)
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -113,26 +159,23 @@ class AddFragment : Fragment() {
             && resultCode == Activity.RESULT_OK
             && data != null)
         {
-            Log.d(TAG, "Photo was sellected")
+            Log.d(TAG, "Photo was selected")
 
-            image_view_add.setImageURI(data?.data)
+            selectedPhotoUri = data?.data
+            image_view_add.setImageURI(selectedPhotoUri)
         }
-
     }
 
-
-    // $todo: update validation
     private fun valid(): Boolean {
         val name       = title_edittext_add.text.toString()
-        val desc_text   = item_desc_edittext_add.text.toString()
+        val descText   = item_desc_edittext_add.text.toString()
 
-        if (name.isEmpty() || desc_text.isEmpty())
+        if (name.isEmpty() || descText.isEmpty() || selectedPhotoUri == null)
             return false
         return true
     }
 
-
-    private fun clearForm() {
+    private fun cleanup() {
         title_edittext_add.text.clear()
         item_desc_edittext_add.text.clear()
         image_view_add.setImageResource(0)
@@ -142,6 +185,7 @@ class AddFragment : Fragment() {
 
 data class Item(val name: String            =  "",
                 val desc_text: String       =  "",
+                val item_image_uri: String  ?= null,
                 val owner_user: OwnerUser   ?= null)
 
 data class OwnerUser(val user_id: String    = "",
