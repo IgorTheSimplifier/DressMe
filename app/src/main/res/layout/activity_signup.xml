@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/loginbackground2"
+    android:background="@drawable/login_background"
     android:fitsSystemWindows="true">
 
     <EditText

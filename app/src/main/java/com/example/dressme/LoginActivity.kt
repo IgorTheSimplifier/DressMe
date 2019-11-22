@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -15,19 +16,24 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        login_button_login.setOnClickListener{
-            performLogin();
+        this.login_button.setOnClickListener{
+            var spinner = loading_spinner
+
+            spinner.setVisibility(View.VISIBLE);
+            authenticate();
+            spinner.setVisibility(View.GONE);
         }
     }
 
 
-    private fun performLogin() {
-        if (!valid()) return
+    private fun authenticate() {
+        // TODO update error text
+        if (!isLoginValid()) return
 
-        val email       = email_edittext_login.text.toString()
-        val password    = password_edittext_login.text.toString()
+        val email    = login_email_field.text.toString()
+        val password = login_password_field.text.toString()
 
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (!it.isSuccessful)   return@addOnCompleteListener
 
@@ -42,9 +48,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    private fun valid(): Boolean {
-        val email       = email_edittext_login.text.toString()
-        val password    = password_edittext_login.text.toString()
+    private fun isLoginValid(): Boolean {
+        val email       = login_email_field.text.toString()
+        val password    = login_password_field.text.toString()
 
         Log.d(TAG, "Email is  $email")
         Log.d(TAG, "Password is  $password")
