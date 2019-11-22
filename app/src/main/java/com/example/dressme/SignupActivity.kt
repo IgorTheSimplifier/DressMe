@@ -1,9 +1,11 @@
 package com.example.dressme
 
+import android.app.PendingIntent.getActivity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
@@ -54,6 +56,10 @@ class SignupActivity : AppCompatActivity() {
     private fun saveUserToFirebaseFirestore() {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref = FirebaseFirestore.getInstance().collection("users")
+
+        if (ref == null) {
+            Toast.makeText(this, "Collection user doesn't exist.", Toast.LENGTH_LONG).show()
+        }
 
         val name            = name_edittext_signup.text.toString()
         val email           = email_edittext_signup.text.toString()
