@@ -1,49 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/DressMe"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/search_layout"
-        android:layout_width="0dp"
-        android:layout_height="84dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:background="#FFC107"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <Button
-            android:id="@+id/ic_search"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="16dp"
-            android:background="@drawable/ic_search_black_24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/search_bar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/search_bar" />
-
-        <EditText
-            android:id="@+id/search_bar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Search Items"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ic_search"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/favorite_layout"
@@ -52,15 +12,14 @@
         android:layout_height="182dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="#F44336"
+        android:theme="@style/DressMe"
         app:layout_constraintBottom_toTopOf="@+id/suggestion_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_layout">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView"
-            style="@style/SuperStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Personalize your news feed. \n Select your favorite brands and sellers now!"
@@ -88,7 +47,6 @@
         android:layout_height="253dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="#00BCD4"
         android:contentDescription="fizzog_four"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -111,7 +69,6 @@
                     android:layout_height="match_parent"
                     android:layout_marginEnd="16dp"
                     android:layout_weight="1"
-                    android:background="#9C27B0"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent">
 

@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 
-class ProfileFragment : Fragment() {
+class companioProfileFragment : Fragment() {
 
     private val TAG: String = "ProfileFragment"
 
