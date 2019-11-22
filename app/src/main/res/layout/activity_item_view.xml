@@ -11,7 +11,7 @@
         android:layout_width="300dp"
         android:layout_height="45dp"
         android:layout_marginStart="52dp"
-        android:text="@string/buyNow"
+        android:text="@string/buy_now"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button3" />
 
@@ -20,7 +20,7 @@
         android:layout_width="412dp"
         android:layout_height="402dp"
         android:layout_marginBottom="364dp"
-        android:contentDescription="@string/itemImage"
+        android:contentDescription="@string/item_image"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,7 +95,7 @@
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        android:text="@string/productDescription"
+        android:text="@string/product_description"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
@@ -105,7 +105,7 @@
         android:layout_height="45dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="24dp"
-        android:text="@string/contactSeller"
+        android:text="@string/contact_seller"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
 
@@ -114,7 +114,7 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_centerHorizontal="true"
-        android:text="@string/ciara"
+        android:text="@string/test_user"
         android:gravity="left|center_vertical"
         android:paddingLeft="25dp"
         android:drawableLeft="@drawable/ic_account_circle_black_32dp"
