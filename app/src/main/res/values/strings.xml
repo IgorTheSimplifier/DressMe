@@ -1,26 +1,36 @@
 <resources>
-    <string name="app_name">DressMe</string>
-    <!-- Strings related to login -->
+    <!-- Action bar labels -->
+    <string name="label_home">DressMe</string>
+    <string name="label_profile_main">ProfileMainActivity</string>
+    <string name="label_settings">Settings</string>
+
+    <!-- Login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in">Register or sign in</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
-    <string name="title_activity_profile_main">ProfileMainActivity</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username.</string>
+    <string name="invalid_password">Password must be longer than 5 characters.</string>
+    <string name="login_failed">"Login failed :("</string>
+
+    <!-- Titles -->
     <string name="title_home">Home</string>
     <string name="title_add">Add</string>
     <string name="title_search">Search</string>
     <string name="title_profile">Profile</string>
-    <string name="itemImage">Image of the item</string>
+
+    <!-- Other -->
+    <string name="item_image">Image of the item</string>
     <string name="size_condition">Size - condition</string>
     <string name="product_name">Product name</string>
     <string name="price">Price</string>
-    <string name="productDescription">Description</string>
-    <string name="buyNow">Buy now</string>
-    <string name="contactSeller">Contact seller</string>
-    <string name="ciara">Ciara Delavigne</string>
+    <string name="product_description">Description</string>
+    <string name="buy_now">Buy now</string>
+    <string name="contact_seller">Contact seller</string>
     <string name="back">BACK</string>
+
+    <!-- Temporary strings (testing) TODO remove -->
+    <string name="test_user">Ciara Delavigne</string>
+
 </resources>
