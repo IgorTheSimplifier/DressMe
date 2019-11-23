@@ -106,7 +106,7 @@ class FirebaseWrapper {
 data class Item(val name: String            =  "",
                 val desc_text: String       =  "",
                 val item_image_uri: String  ?= null,
-                val owner_user: OwnerUser?= null)
+                val owner_user: OwnerUser   ?= null)
 
 data class OwnerUser(val user_id: String    = "",
                      val name: String       = "")
