@@ -7,51 +7,37 @@
         android:label="@string/label_home"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
         <!-- Pre App Activities -->
         <activity
             android:name=".MainActivity"
             android:label="@string/label_home"
             android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity
-            android:name=".SignupActivity"
+            android:name=".SignUpActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".SignInActivity"
-            android:screenOrientation="portrait" />
-
-
-
-        <!-- Profile, browsing and e-commerce -->
+            android:screenOrientation="portrait" /> <!-- Profile, browsing and e-commerce -->
         <activity
             android:name=".InspectItemActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".AboutActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".SettingsActivity"
             android:label="@string/label_settings"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ProfileMainActivity"
             android:label="@string/label_profile_main"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

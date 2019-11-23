@@ -21,10 +21,10 @@ class SignInActivity : AppCompatActivity() {
 
         this.signIn_signIn_button.setOnClickListener{
             spinner = signIn_spinner_progressBar
-            spinner.setVisibility(View.VISIBLE);
+            spinner.setVisibility(View.VISIBLE)
             KeyboardAPI.hideKeyboard(this)
 
-            signMeIn();
+            signMeIn()
         }
     }
 

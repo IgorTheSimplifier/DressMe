@@ -1,8 +1,9 @@
 package com.example.dressme
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
@@ -13,12 +14,11 @@ import kotlinx.android.synthetic.main.activity_signup.*
 import android.app.Activity
 import android.view.inputmethod.InputMethodManager
 
+class SignUpActivity : AppCompatActivity() {
 
-class SignupActivity : AppCompatActivity() {
+   // val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
 
-    val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-
-    private val TAG: String = "SignupActivity"
+    private val TAG: String = "SignUpActivity"
     private lateinit var spinner: ProgressBar
 
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,16 +27,16 @@ class SignupActivity : AppCompatActivity() {
 
         signUp_createAccount_button.setOnClickListener {
             // TODO refactor this code: Redundant with SIGNUP/SIGNUP
-            spinner = signIn_spinner_progressBar
+            spinner = signUp_spinner_progressBar
             spinner.setVisibility(View.VISIBLE)
             KeyboardAPI.hideKeyboard(this)
 
             signMeUp()
         }
 
-        signIn_signIn_button.setOnClickListener {
+        signUp_signIn_textClickable.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
-            startActivity(intent);
+            startActivity(intent)
         }
     }
 
@@ -56,7 +56,7 @@ class SignupActivity : AppCompatActivity() {
                     return@addOnCompleteListener
                 }
 
-                Log.d(TAG, "Signup has succeeded ${it.result?.user?.uid}")
+                Log.d(TAG, "SignUp has succeeded ${it.result?.user?.uid}")
                 saveUserToFirebaseFirestore()
 
                 val intent = Intent(this, ProfileMainActivity::class.java)
@@ -65,7 +65,7 @@ class SignupActivity : AppCompatActivity() {
                 startActivity(intent);
             }
             .addOnFailureListener {
-                Log.d(TAG, "Signup has failed ${it.message}")
+                Log.d(TAG, "SignUp has failed ${it.message}")
             }
     }
 
