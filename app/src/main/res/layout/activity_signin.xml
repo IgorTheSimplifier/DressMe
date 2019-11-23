@@ -14,7 +14,7 @@
     tools:context=".SignInActivity">
 
     <EditText
-        android:id="@+id/textField_email"
+        android:id="@+id/signIn_email_textEdit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_login"
+        android:id="@+id/signIn_signIn_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -46,11 +46,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textField_password"
+        app:layout_constraintTop_toBottomOf="@+id/signIn_password_textEdit"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/textField_password"
+        android:id="@+id/signIn_password_textEdit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -67,10 +67,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textField_email" />
+        app:layout_constraintTop_toBottomOf="@+id/signIn_email_textEdit" />
 
     <ProgressBar
-        android:id="@+id/loading_spinner"
+        android:id="@+id/signIn_spinner_progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

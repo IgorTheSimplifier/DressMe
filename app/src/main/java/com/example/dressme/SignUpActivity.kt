@@ -25,16 +25,16 @@ class SignupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
-        button_create_account.setOnClickListener {
+        signUp_createAccount_button.setOnClickListener {
             // TODO refactor this code: Redundant with SIGNUP/SIGNUP
-            spinner = loading_spinner
+            spinner = signIn_spinner_progressBar
             spinner.setVisibility(View.VISIBLE)
             KeyboardAPI.hideKeyboard(this)
 
             signMeUp()
         }
 
-        button_login.setOnClickListener {
+        signIn_signIn_button.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent);
         }
@@ -46,8 +46,8 @@ class SignupActivity : AppCompatActivity() {
             return
         }
 
-        val email           = textEdit_email.text.toString()
-        val password        = textEdit_password.text.toString()
+        val email           = signUp_email_textEdit.text.toString()
+        val password        = signUp_password_textEdit.text.toString()
 
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
@@ -74,8 +74,8 @@ class SignupActivity : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref = FirebaseFirestore.getInstance().collection("users")
 
-        val name            = textEdit_name.text.toString()
-        val email           = textEdit_email.text.toString()
+        val name            = signUp_name_textEdit.text.toString()
+        val email           = signUp_email_textEdit.text.toString()
 
         val user = User(name, email)
 
@@ -91,10 +91,10 @@ class SignupActivity : AppCompatActivity() {
 
     // $todo: signup validation update
     private fun valid(): Boolean {
-        val name            = textEdit_name.text.toString()
-        val email           = textEdit_email.text.toString()
-        val password        = textEdit_password.text.toString()
-        val passwordReenter = textEdit_password_confirmation.text.toString()
+        val name            = signUp_name_textEdit.text.toString()
+        val email           = signUp_email_textEdit.text.toString()
+        val password        = signUp_password_textEdit.text.toString()
+        val passwordReenter = signUp_passwordConf_textEdit.text.toString()
 
         Log.d(TAG, "Name is  $name")
         Log.d(TAG, "Email is  $email")

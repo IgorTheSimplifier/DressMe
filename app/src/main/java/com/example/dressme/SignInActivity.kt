@@ -19,8 +19,8 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
 
-        this.button_login.setOnClickListener{
-            spinner = loading_spinner
+        this.signIn_signIn_button.setOnClickListener{
+            spinner = signIn_spinner_progressBar
             spinner.setVisibility(View.VISIBLE);
             KeyboardAPI.hideKeyboard(this)
 
@@ -33,8 +33,8 @@ class SignInActivity : AppCompatActivity() {
         // TODO update error text
         if (!isLoginValid()) return
 
-        val email    = textField_email.text.toString()
-        val password = textField_password.text.toString()
+        val email    = signIn_email_textEdit.text.toString()
+        val password = signIn_password_textEdit.text.toString()
 
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
@@ -56,8 +56,8 @@ class SignInActivity : AppCompatActivity() {
 
 
     private fun isLoginValid(): Boolean {
-        val email       = textField_email.text.toString()
-        val password    = textField_password.text.toString()
+        val email       = signIn_email_textEdit.text.toString()
+        val password    = signIn_password_textEdit.text.toString()
 
         Log.d(TAG, "Email is  $email")
         Log.d(TAG, "Password is  $password")
