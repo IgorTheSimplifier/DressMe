@@ -29,7 +29,7 @@ class SessionFragment : Fragment() {
         sessionViewModel.text.observe(this, Observer {
         })
 
-        root.imageView21.setOnClickListener{
+        root.img_item_one.setOnClickListener{
             val intent = Intent(context, InspectItemActivity::class.java)
             startActivity(intent);
         }
