@@ -4,44 +4,64 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
+import com.example.dressme.util.KeyboardAPI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_signup.*
+import android.app.Activity
+import android.view.inputmethod.InputMethodManager
+
 
 class SignupActivity : AppCompatActivity() {
 
+    val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+
     private val TAG: String = "SignupActivity"
+    private lateinit var spinner: ProgressBar
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
-        confirm_button_setting.setOnClickListener {
-            performSignup()
+        signUp_createAccount_button.setOnClickListener {
+            // TODO refactor this code: Redundant with SIGNUP/SIGNUP
+            spinner = signIn_spinner_progressBar
+            spinner.setVisibility(View.VISIBLE)
+            KeyboardAPI.hideKeyboard(this)
+
+            signMeUp()
         }
 
-        login_button_signup.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
+        signIn_signIn_button.setOnClickListener {
+            val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent);
         }
     }
 
-
-    private fun performSignup() {
-        if (!valid())
+    private fun signMeUp() {
+        if (!valid()) {
+            spinner.setVisibility(View.GONE)
             return
+        }
 
-        val email           = email_edittext_signup.text.toString()
-        val password        = password_edittext_signup.text.toString()
+        val email           = signUp_email_textEdit.text.toString()
+        val password        = signUp_password_textEdit.text.toString()
 
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
-                if (!it.isSuccessful) return@addOnCompleteListener
+                if (!it.isSuccessful) {
+                    spinner.setVisibility(View.GONE)
+                    return@addOnCompleteListener
+                }
 
                 Log.d(TAG, "Signup has succeeded ${it.result?.user?.uid}")
                 saveUserToFirebaseFirestore()
 
                 val intent = Intent(this, ProfileMainActivity::class.java)
+
+                spinner.setVisibility(View.GONE)
                 startActivity(intent);
             }
             .addOnFailureListener {
@@ -54,8 +74,8 @@ class SignupActivity : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref = FirebaseFirestore.getInstance().collection("users")
 
-        val name            = name_edittext_signup.text.toString()
-        val email           = email_edittext_signup.text.toString()
+        val name            = signUp_name_textEdit.text.toString()
+        val email           = signUp_email_textEdit.text.toString()
 
         val user = User(name, email)
 
@@ -71,10 +91,10 @@ class SignupActivity : AppCompatActivity() {
 
     // $todo: signup validation update
     private fun valid(): Boolean {
-        val name            = name_edittext_signup.text.toString()
-        val email           = email_edittext_signup.text.toString()
-        val password        = password_edittext_signup.text.toString()
-        val passwordReenter = password_reenter_edittext_signup.text.toString()
+        val name            = signUp_name_textEdit.text.toString()
+        val email           = signUp_email_textEdit.text.toString()
+        val password        = signUp_password_textEdit.text.toString()
+        val passwordReenter = signUp_passwordConf_textEdit.text.toString()
 
         Log.d(TAG, "Name is  $name")
         Log.d(TAG, "Email is  $email")

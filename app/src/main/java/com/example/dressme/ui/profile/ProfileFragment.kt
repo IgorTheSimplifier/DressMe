@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.example.dressme.AboutActivity
-import com.example.dressme.LoginActivity
+import com.example.dressme.SignInActivity
 import com.example.dressme.R
 import com.example.dressme.SettingsActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -38,7 +38,7 @@ class ProfileFragment : Fragment() {
         root.button_logout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             Log.d(TAG, "Successfully logged out")
-            val intent = Intent(context, LoginActivity::class.java)
+            val intent = Intent(context, SignInActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or
                                 Intent.FLAG_ACTIVITY_NEW_TASK or
                                 Intent.FLAG_ACTIVITY_CLEAR_TASK)

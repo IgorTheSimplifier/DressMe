@@ -8,82 +8,82 @@
     android:fitsSystemWindows="true">
 
     <EditText
-        android:id="@+id/name_edittext_signup"
+        android:id="@+id/signUp_name_textEdit"
         android:layout_width="332dp"
         android:layout_height="43dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="#D4DADF"
-        android:hint="Name"
+        android:hint="@string/hint_name"
         android:inputType="textPersonName"
         android:textColor="#D4DADF"
         android:textColorHint="#D4DADF"
-        app:layout_constraintBottom_toTopOf="@+id/email_edittext_signup"
+        app:layout_constraintBottom_toTopOf="@+id/signUp_email_textEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/email_edittext_signup"
+        android:id="@+id/signUp_email_textEdit"
         android:layout_width="333dp"
         android:layout_height="47dp"
         android:backgroundTint="#D4DADF"
-        android:hint="Email"
+        android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
         android:textColor="#D4DADF"
         android:textColorHint="#D4DADF"
-        app:layout_constraintBottom_toTopOf="@+id/password_edittext_signup"
+        app:layout_constraintBottom_toTopOf="@+id/signUp_password_textEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/password_edittext_signup"
+        android:id="@+id/signUp_password_textEdit"
         android:layout_width="334dp"
         android:layout_height="48dp"
         android:backgroundTint="#D4DADF"
-        android:hint="Password"
+        android:hint="@string/hint_password"
         android:inputType="textPassword"
         android:textColor="#D4DADF"
         android:textColorHint="#D4DADF"
-        app:layout_constraintBottom_toTopOf="@+id/password_reenter_edittext_signup"
+        app:layout_constraintBottom_toTopOf="@+id/signUp_passwordConf_textEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/password_reenter_edittext_signup"
+        android:id="@+id/signUp_passwordConf_textEdit"
         android:layout_width="334dp"
         android:layout_height="48dp"
         android:layout_marginBottom="68dp"
         android:backgroundTint="#D4DADF"
-        android:hint="Re-enter Password"
+        android:hint="@string/hint_confirm_password"
         android:inputType="textPassword"
         android:textColor="#D4DADF"
         android:textColorHint="#D4DADF"
-        app:layout_constraintBottom_toTopOf="@+id/confirm_button_setting"
+        app:layout_constraintBottom_toTopOf="@+id/signUp_createAccount_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/confirm_button_setting"
+        android:id="@+id/signUp_createAccount_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="12dp"
-        android:text="Create Account"
-        app:layout_constraintBottom_toTopOf="@+id/login_button_signup"
+        android:text="@string/create_account"
+        app:layout_constraintBottom_toTopOf="@+id/signUp_logIn_textClickable"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/login_button_signup"
+        android:id="@+id/signUp_logIn_textClickable"
         android:layout_width="399dp"
         android:layout_height="21dp"
         android:layout_marginBottom="208dp"
         android:backgroundTint="#D4DADF"
         android:gravity="center"
-        android:text="Already a member? Login"
+        android:text="@string/already_member"
         android:textColor="#D4DADF"
         android:textColorHint="#D4DADF"
         android:textSize="16dip"
@@ -91,6 +91,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/signUp_spinner_progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.871" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

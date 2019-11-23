@@ -1,7 +1,8 @@
-package com.example.dressme
+package com.example.dressme.util
 
 import android.net.Uri
 import android.util.Log
+import com.example.dressme.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -32,7 +33,12 @@ class FirebaseWrapper {
                     // If upload succeedded upload item as a transaction
                     ref.downloadUrl.addOnSuccessListener {
                         Log.d(TAG, "Photo download link is in here")
-                        uploadItemTransaction(TAG, it.toString(), name, descText)
+                        uploadItemTransaction(
+                            TAG,
+                            it.toString(),
+                            name,
+                            descText
+                        )
                     }
                 }
                 .addOnFailureListener {
@@ -72,9 +78,11 @@ class FirebaseWrapper {
                 Log.d(TAG, "User Successfully desserealised")
 
                 val ownerUserName = user?.name ?: ""
-                val ownerUser: OwnerUser = OwnerUser(userOwnerId, ownerUserName)
+                val ownerUser: OwnerUser =
+                    OwnerUser(userOwnerId, ownerUserName)
 
-                val item: Item = Item(name, descText, itemImageUri, ownerUser)
+                val item: Item =
+                    Item(name, descText, itemImageUri, ownerUser)
 
                 val newItemRef = db.collection("items").document()
 
