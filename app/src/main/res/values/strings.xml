@@ -14,11 +14,22 @@
     <string name="invalid_password">Password must be longer than 5 characters.</string>
     <string name="login_failed">"Login failed :("</string>
 
-    <!-- Titles -->
+    <!-- Action bar titles -->
     <string name="title_home">Home</string>
     <string name="title_add">Add</string>
     <string name="title_search">Search</string>
     <string name="title_profile">Profile</string>
+
+    <!-- Temporary strings (testing) TODO remove -->
+    <string name="test_user">Ciara Delavigne</string>
+
+    <!-- Signup page -->
+    <string name="hint_name">Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm password</string>
+    <string name="create_account">Create Account</string>
+    <string name="already_member">Already a member? Login here</string>
 
     <!-- Other -->
     <string name="item_image">Image of the item</string>
@@ -29,14 +40,5 @@
     <string name="buy_now">Buy now</string>
     <string name="contact_seller">Contact seller</string>
     <string name="back">BACK</string>
-
-    <!-- Temporary strings (testing) TODO remove -->
-    <string name="test_user">Ciara Delavigne</string>
-    <string name="hint_confirm_password">Confirm password</string>
-    <string name="hint_password" />
-    <string name="hint_email">Email</string>
-    <string name="hint_name">Name</string>
-    <string name="create_account">Create Account</string>
-    <string name="already_member">Already a member? Login here</string>
 
 </resources>

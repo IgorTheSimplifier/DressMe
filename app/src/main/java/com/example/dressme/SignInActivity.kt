@@ -6,27 +6,30 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
+import com.example.dressme.util.KeyboardAPI
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_signin.*
 
-class LoginActivity : AppCompatActivity() {
+class SignInActivity : AppCompatActivity() {
 
-    private val TAG: String = "LoginActivity"
+    private val TAG: String = "SignInActivity"
     private lateinit var spinner: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_signin)
 
         this.button_login.setOnClickListener{
             spinner = loading_spinner
             spinner.setVisibility(View.VISIBLE);
-            authenticate();
+            KeyboardAPI.hideKeyboard(this)
+
+            signMeIn();
         }
     }
 
 
-    private fun authenticate() {
+    private fun signMeIn() {
         // TODO update error text
         if (!isLoginValid()) return
 

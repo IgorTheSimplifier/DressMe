@@ -6,11 +6,17 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
+import com.example.dressme.util.KeyboardAPI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_signup.*
+import android.app.Activity
+import android.view.inputmethod.InputMethodManager
+
 
 class SignupActivity : AppCompatActivity() {
+
+    val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
 
     private val TAG: String = "SignupActivity"
     private lateinit var spinner: ProgressBar
@@ -20,20 +26,21 @@ class SignupActivity : AppCompatActivity() {
         setContentView(R.layout.activity_signup)
 
         button_create_account.setOnClickListener {
+            // TODO refactor this code: Redundant with SIGNUP/SIGNUP
             spinner = loading_spinner
             spinner.setVisibility(View.VISIBLE)
+            KeyboardAPI.hideKeyboard(this)
 
-            performSignup()
+            signMeUp()
         }
 
         button_login.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent);
         }
     }
 
-
-    private fun performSignup() {
+    private fun signMeUp() {
         if (!valid()) {
             spinner.setVisibility(View.GONE)
             return
