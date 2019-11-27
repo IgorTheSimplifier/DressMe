@@ -4,9 +4,11 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="colorForeground">#f1d4ae</color>
-    <color name="colorBackground">#d4724c</color>
+    <color name="colorForeground">#F1D4AE</color>
+    <color name="colorBackground">#D4724C</color>
     <color name="colorAccentOne">#DBB593</color>
-    <color name="colorAccentTwo">#543f2b</color>
-    <color name="colorAccentThree">#fffffe</color>
+    <color name="colorAccentTwo">#543F2B</color>
+    <color name="colorAccentThree">#FFFFFF</color>
+
+    <color name="colorButton">#888888</color>
 </resources>

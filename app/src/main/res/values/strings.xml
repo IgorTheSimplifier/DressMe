@@ -42,7 +42,7 @@
     <string name="back">BACK</string>
     <string name="button_logout">LOGOUT</string>
     <string name="session_explanation_personalize" />
-    <string name="fragment_session_personalize">Customize your news feed. \\n Select your favorite brands and sellers now!</string>
+    <string name="fragment_session_personalize">Customize your news feed.\nSelect your favorite brands and sellers now!</string>
     <string name="button_customize">CUSTOMIZE</string>
 
 </resources>
