@@ -6,31 +6,31 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_customize"
+        android:id="@+id/session_customize_layout"
         style="@style/SuperStyle"
         android:layout_width="0dp"
         android:layout_height="182dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:theme="@style/DressMe"
-        app:layout_constraintBottom_toTopOf="@+id/hScroll_suggestions"
+        app:layout_constraintBottom_toTopOf="@+id/session_scroll_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView_personalize"
+            android:id="@+id/session_personalize_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/fragment_session_personalize"
             android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@+id/button_personalize"
+            app:layout_constraintBottom_toTopOf="@+id/session_personalize_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button_personalize"
+            android:id="@+id/session_personalize_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -42,31 +42,30 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/hScroll_suggestions"
+        android:id="@+id/session_scroll_layout"
         android:layout_width="0dp"
         android:layout_height="253dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:contentDescription="fizzog_four"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_customize">
+        app:layout_constraintTop_toBottomOf="@+id/session_customize_layout">
 
         <HorizontalScrollView
-            android:id="@+id/horizontalScrollView"
+            android:id="@+id/session_horizontalScroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/layout_horizontal"
+                android:id="@+id/session_horizontalScroll_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:baselineAligned="false"
                 android:orientation="horizontal">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/item_one"
+                    android:id="@+id/session_itemOne_layout"
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="16dp"
@@ -75,79 +74,79 @@
                     app:layout_constraintStart_toStartOf="parent">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layout_item_one_seller"
+                        android:id="@+id/session_sellerOne_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                            android:id="@+id/img_item_one_seller"
+                            android:id="@+id/session_sellerOne_image"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:layout_constraintBottom_toBottomOf="@+id/txt_item_one_seller_name"
+                            app:layout_constraintBottom_toBottomOf="@+id/session_sellerOneName_textView"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/txt_item_one_seller_name"
+                            app:layout_constraintTop_toTopOf="@+id/session_sellerOneName_textView"
                             app:srcCompat="@android:drawable/btn_dialog" />
 
                         <TextView
-                            android:id="@+id/txt_item_one_seller_name"
+                            android:id="@+id/session_sellerOneName_textView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="TristanDu92xXx"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/img_item_one_seller"
+                            app:layout_constraintStart_toEndOf="@+id/session_sellerOne_image"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <ImageView
-                        android:id="@+id/img_item_one"
+                        android:id="@+id/session_itemOne_image"
                         android:layout_width="133dp"
                         android:layout_height="135dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/layout_item_one_seller"
+                        app:layout_constraintTop_toBottomOf="@+id/session_sellerOne_layout"
                         app:srcCompat="@android:drawable/ic_menu_camera" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layout_item_one_info"
+                        android:id="@+id/session_itemOneDescription_layout"
                         android:layout_width="133dp"
                         android:layout_height="64dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/img_item_one">
+                        app:layout_constraintTop_toBottomOf="@+id/session_itemOne_image">
 
                         <TextView
-                            android:id="@+id/txt_item_one_price_tag"
+                            android:id="@+id/session_itemOnePrice_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="¥14.99"
-                            app:layout_constraintBottom_toTopOf="@+id/txt_item_one_brand"
+                            app:layout_constraintBottom_toTopOf="@+id/session_itemOneBrand_text"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/txt_item_one_brand"
+                            android:id="@+id/session_itemOneBrand_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Christian Dior"
-                            app:layout_constraintBottom_toTopOf="@+id/txt_item_one_misc"
+                            app:layout_constraintBottom_toTopOf="@+id/session_itemOneInfo_text"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_item_one_price_tag" />
+                            app:layout_constraintTop_toBottomOf="@+id/session_itemOnePrice_text" />
 
                         <TextView
-                            android:id="@+id/txt_item_one_misc"
+                            android:id="@+id/session_itemOneInfo_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="38 / 7.5"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_item_one_brand" />
+                            app:layout_constraintTop_toBottomOf="@+id/session_itemOneBrand_text" />
 
                         <TextView
-                            android:id="@+id/txt_item_one_rating"
+                            android:id="@+id/session_itemOneRating_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="23 keur"
@@ -158,7 +157,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/item_two"
+                    android:id="@+id/session_itemTwo_layout"
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="16dp"
@@ -169,7 +168,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/item_three"
+                    android:id="@+id/session_itemThree_layout"
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="16dp"
