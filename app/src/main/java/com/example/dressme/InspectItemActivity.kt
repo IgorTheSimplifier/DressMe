@@ -18,5 +18,5 @@ class InspectItemActivity : AppCompatActivity() {
         onBackPressed()
         return true
     }
-    
+
 }

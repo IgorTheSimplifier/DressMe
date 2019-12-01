@@ -4,13 +4,13 @@
 
     <application
         android:allowBackup="true"
-        android:label="@string/label_home"
+        android:label="@string/label_appName"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <!-- Pre App Activities -->
         <activity
             android:name=".ProfileMainActivity"
-            android:label="@string/label_profile_main"
+            android:label="@string/label_appName"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,12 +20,8 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="@string/label_home"
+            android:label="@string/label_appName"
             android:screenOrientation="portrait">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
         </activity>
 
         <activity
