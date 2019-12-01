@@ -46,6 +46,7 @@ class SignInActivity : AppCompatActivity() {
                 // else if successful
                 Log.d(TAG, "Successfully logged in ${it.result?.user?.uid}")
                 val intent = Intent(this, ProfileMainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 spinner.setVisibility(View.GONE);
                 startActivity(intent);
             }

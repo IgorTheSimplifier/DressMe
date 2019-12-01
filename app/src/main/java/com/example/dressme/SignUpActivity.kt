@@ -60,7 +60,7 @@ class SignUpActivity : AppCompatActivity() {
                 saveUserToFirebaseFirestore()
 
                 val intent = Intent(this, ProfileMainActivity::class.java)
-
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK) 
                 spinner.setVisibility(View.GONE)
                 startActivity(intent);
             }
