@@ -9,15 +9,25 @@
         android:theme="@style/AppTheme">
         <!-- Pre App Activities -->
         <activity
+            android:name=".ProfileMainActivity"
+            android:label="@string/label_profile_main"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".MainActivity"
             android:label="@string/label_home"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".SignUpActivity"
             android:screenOrientation="portrait" />
@@ -34,10 +44,7 @@
             android:name=".SettingsActivity"
             android:label="@string/label_settings"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ProfileMainActivity"
-            android:label="@string/label_profile_main"
-            android:screenOrientation="portrait"></activity>
+
     </application>
 
 </manifest>
