@@ -16,7 +16,10 @@ import com.example.dressme.models.UserAuth
 
 class SignUpActivity : AppCompatActivity() {
 
-    private val TAG: String = "SignUpActivity"
+    companion object {
+        val TAG: String = "SignUpActivity"
+    }
+
     private lateinit var spinner: ProgressBar
 
     public override fun onCreate(savedInstanceState: Bundle?) {

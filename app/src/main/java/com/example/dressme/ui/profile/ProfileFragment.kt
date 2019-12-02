@@ -17,7 +17,9 @@ import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 class ProfileFragment : Fragment() {
 
-    private val TAG: String = "ProfileFragment"
+    companion object {
+        val TAG: String = "ProfileFragment"
+    }
 
     private lateinit var profileViewModel: ProfileViewModel
 

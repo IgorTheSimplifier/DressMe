@@ -13,7 +13,10 @@ import kotlinx.android.synthetic.main.activity_signin.*
 
 class SignInActivity : AppCompatActivity() {
 
-    private val TAG: String = "SignInActivity"
+    companion object {
+        val TAG: String = "SignInActivity"
+    }
+
     private lateinit var spinner: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {

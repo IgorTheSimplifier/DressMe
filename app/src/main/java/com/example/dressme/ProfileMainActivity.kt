@@ -12,6 +12,10 @@ import com.google.firebase.auth.FirebaseAuth
 
 class ProfileMainActivity : AppCompatActivity() {
 
+    companion object {
+        val TAG: String = "ProfileMainActivity"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_session)
