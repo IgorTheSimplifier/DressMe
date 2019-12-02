@@ -7,16 +7,14 @@ import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.Toast
 import com.example.dressme.util.KeyboardAPI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_signup.*
-import android.app.Activity
-import android.view.inputmethod.InputMethodManager
+import com.example.dressme.models.UserAuth
 
 class SignUpActivity : AppCompatActivity() {
-
-   // val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
 
     private val TAG: String = "SignUpActivity"
     private lateinit var spinner: ProgressBar
@@ -26,11 +24,9 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_signup)
 
         signUp_createAccount_button.setOnClickListener {
-            // TODO refactor this code: Redundant with SIGNUP/SIGNUP
             spinner = signUp_spinner_progressBar
             spinner.setVisibility(View.VISIBLE)
             KeyboardAPI.hideKeyboard(this)
-
             signMeUp()
         }
 
@@ -41,8 +37,10 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun signMeUp() {
-        if (!valid()) {
+        // TODO update error text
+        if (!validForm()) {
             spinner.setVisibility(View.GONE)
+            Toast.makeText(this, "Form cannot be validated", Toast.LENGTH_LONG).show()
             return
         }
 
@@ -66,6 +64,7 @@ class SignUpActivity : AppCompatActivity() {
             }
             .addOnFailureListener {
                 Log.d(TAG, "SignUp has failed ${it.message}")
+                Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
             }
     }
 
@@ -74,10 +73,10 @@ class SignUpActivity : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref = FirebaseFirestore.getInstance().collection("users")
 
-        val name            = signUp_name_textEdit.text.toString()
-        val email           = signUp_email_textEdit.text.toString()
+        val name    = signUp_name_textEdit.text.toString()
+        val email   = signUp_email_textEdit.text.toString()
 
-        val user = User(name, email)
+        val user = UserAuth(name, email)
 
         ref.document(uid).set(user)
             .addOnSuccessListener {
@@ -89,8 +88,7 @@ class SignUpActivity : AppCompatActivity() {
 
     }
 
-    // $todo: signup validation update
-    private fun valid(): Boolean {
+    private fun validForm(): Boolean {
         val name            = signUp_name_textEdit.text.toString()
         val email           = signUp_email_textEdit.text.toString()
         val password        = signUp_password_textEdit.text.toString()
@@ -109,5 +107,3 @@ class SignUpActivity : AppCompatActivity() {
         return true
     }
 }
-
-data class User(val name: String = "", val email: String = "")

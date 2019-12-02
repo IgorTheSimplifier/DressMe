@@ -54,7 +54,7 @@ class AddFragment : Fragment() {
 
     private fun confirm() {
         // $todo: add proper notification
-        if(!valid()) {
+        if(!validForm()) {
             Toast.makeText(getActivity(), "Form cannot be validated", Toast.LENGTH_LONG).show()
             return
         }
@@ -85,12 +85,12 @@ class AddFragment : Fragment() {
         {
             Log.d(TAG, "Photo was selected")
 
-            selectedPhotoUri = data?.data
+            selectedPhotoUri = data.data
             image_view_add.setImageURI(selectedPhotoUri)
         }
     }
 
-    private fun valid(): Boolean {
+    private fun validForm(): Boolean {
         val name       = title_edittext_add.text.toString()
         val descText   = item_desc_edittext_add.text.toString()
 

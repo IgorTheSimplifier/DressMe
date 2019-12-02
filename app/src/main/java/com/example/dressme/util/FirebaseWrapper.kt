@@ -2,7 +2,9 @@ package com.example.dressme.util
 
 import android.net.Uri
 import android.util.Log
-import com.example.dressme.User
+import com.example.dressme.models.Item
+import com.example.dressme.models.OwnerUser
+import com.example.dressme.models.UserAuth
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -26,7 +28,7 @@ class FirebaseWrapper {
             val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
 
             // Uploading photo first
-            ref.putFile(selectedPhotoUri!!)
+            ref.putFile(selectedPhotoUri)
                 .addOnSuccessListener {
                     Log.d(TAG, "File has been uploaded ${it.metadata?.path}")
 
@@ -62,7 +64,7 @@ class FirebaseWrapper {
             val db = FirebaseFirestore.getInstance()
 
             if (userOwnerId == "") {
-                Log.d(TAG, "[Error] User Owner ID is null")
+                Log.d(TAG, "[Error] UserAuth Owner ID is null")
                 return
             }
 
@@ -74,8 +76,8 @@ class FirebaseWrapper {
                         db.collection("users")
                             .document(userOwnerId)
                     )
-                var user: User? = snapshot.toObject(User::class.java)
-                Log.d(TAG, "User Successfully desserealised")
+                var user: UserAuth? = snapshot.toObject(UserAuth::class.java)
+                Log.d(TAG, "UserAuth Successfully desserealised")
 
                 val ownerUserName = user?.name ?: ""
                 val ownerUser: OwnerUser =
@@ -102,11 +104,3 @@ class FirebaseWrapper {
         }
     }
 }
-
-data class Item(val name: String            =  "",
-                val desc_text: String       =  "",
-                val item_image_uri: String  ?= null,
-                val owner_user: OwnerUser   ?= null)
-
-data class OwnerUser(val user_id: String    = "",
-                     val name: String       = "")

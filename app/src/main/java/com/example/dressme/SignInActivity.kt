@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.Toast
 import com.example.dressme.util.KeyboardAPI
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_signin.*
@@ -31,7 +32,11 @@ class SignInActivity : AppCompatActivity() {
 
     private fun signMeIn() {
         // TODO update error text
-        if (!isLoginValid()) return
+        if (!validForm()) {
+            spinner.setVisibility(View.GONE)
+            Toast.makeText(this, "Form cannot be empty", Toast.LENGTH_LONG).show()
+            return
+        }
 
         val email    = signIn_email_textEdit.text.toString()
         val password = signIn_password_textEdit.text.toString()
@@ -52,11 +57,12 @@ class SignInActivity : AppCompatActivity() {
             }
             .addOnFailureListener {
                 Log.d(TAG, "Failed to login ${it.message}")
+                Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
             }
     }
 
 
-    private fun isLoginValid(): Boolean {
+    private fun validForm(): Boolean {
         val email       = signIn_email_textEdit.text.toString()
         val password    = signIn_password_textEdit.text.toString()
 
