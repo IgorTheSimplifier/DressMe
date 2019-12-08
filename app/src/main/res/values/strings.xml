@@ -1,7 +1,6 @@
 <resources>
     <!-- Action bar labels -->
-    <string name="label_home">DressMe</string>
-    <string name="label_profile_main">ProfileMainActivity</string>
+    <string name="label_appName">DressMe</string>
     <string name="label_settings">Settings</string>
 
     <!-- Login -->

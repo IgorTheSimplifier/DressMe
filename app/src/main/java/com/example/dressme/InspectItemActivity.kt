@@ -5,8 +5,20 @@ import android.os.Bundle
 
 class InspectItemActivity : AppCompatActivity() {
 
+    companion object {
+        val TAG: String = "InspectItemActivity"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inspect_item)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
 }

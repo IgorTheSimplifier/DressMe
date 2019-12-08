@@ -6,13 +6,17 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.Toast
 import com.example.dressme.util.KeyboardAPI
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_signin.*
 
 class SignInActivity : AppCompatActivity() {
 
-    private val TAG: String = "SignInActivity"
+    companion object {
+        val TAG: String = "SignInActivity"
+    }
+
     private lateinit var spinner: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +35,11 @@ class SignInActivity : AppCompatActivity() {
 
     private fun signMeIn() {
         // TODO update error text
-        if (!isLoginValid()) return
+        if (!validForm()) {
+            spinner.setVisibility(View.GONE)
+            Toast.makeText(this, "Form cannot be empty", Toast.LENGTH_LONG).show()
+            return
+        }
 
         val email    = signIn_email_textEdit.text.toString()
         val password = signIn_password_textEdit.text.toString()
@@ -46,16 +54,18 @@ class SignInActivity : AppCompatActivity() {
                 // else if successful
                 Log.d(TAG, "Successfully logged in ${it.result?.user?.uid}")
                 val intent = Intent(this, ProfileMainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 spinner.setVisibility(View.GONE);
                 startActivity(intent);
             }
             .addOnFailureListener {
                 Log.d(TAG, "Failed to login ${it.message}")
+                Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
             }
     }
 
 
-    private fun isLoginValid(): Boolean {
+    private fun validForm(): Boolean {
         val email       = signIn_email_textEdit.text.toString()
         val password    = signIn_password_textEdit.text.toString()
 

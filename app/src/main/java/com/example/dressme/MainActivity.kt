@@ -7,7 +7,10 @@ import kotlinx.android.synthetic.main.activity_landing_page.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val TAG: String = "MainActivity"
+    companion object {
+        val TAG: String = "MainActivity"
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
