@@ -11,7 +11,7 @@ class InspectItemActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_inspect_item)
+        setContentView(R.layout.activity_inspect)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }

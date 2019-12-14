@@ -56,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/session_sellerOne_layout"
-        app:srcCompat="@drawable/ic_dashboard" />
+        app:srcCompat="@drawable/progress_animation" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/session_itemOneDescription_layout"
