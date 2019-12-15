@@ -20,9 +20,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ListResult
 import com.google.firebase.storage.StorageReference
-import org.w3c.dom.Document
 
 
 class SessionFragment : Fragment() {
@@ -96,11 +94,15 @@ class SessionFragment : Fragment() {
 
     private fun snapshotToModel(doc: DocumentSnapshot): ItemModel {
         return ItemModel(
+            0,
+            doc.get("sellerId") as Long,
             doc.get("name") as String?,
-            doc.get("description") as String?,
             doc.get("brand") as String?,
-            doc.get("image_uri") as String?,
-            doc.get("price") as String?
+            doc.get("description") as String?,
+            doc.get("info") as String?,
+            doc.get("price") as String?,
+            doc.get("rating") as String?,
+            doc.get("imageUri") as String?
         )
     }
 }

@@ -18,9 +18,10 @@
 
         <ImageView
             android:id="@+id/session_sellerOne_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="27dp"
             android:layout_marginStart="4dp"
+            android:adjustViewBounds="true"
             app:layout_constraintBottom_toBottomOf="@+id/session_sellerOneName_textView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/session_sellerOneName_textView"
@@ -47,11 +48,12 @@
 
     <ImageView
         android:id="@+id/session_itemOne_image"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="160dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:adjustViewBounds="true"
         android:background="@color/colorAccentThree"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +62,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/session_itemOneDescription_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"

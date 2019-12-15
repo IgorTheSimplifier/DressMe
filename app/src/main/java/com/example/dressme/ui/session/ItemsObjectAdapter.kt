@@ -1,6 +1,7 @@
 package com.example.dressme.ui.session
 
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +10,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dressme.AboutActivity
 import com.example.dressme.InspectItemActivity
+import com.example.dressme.ProfileMainActivity
 import com.example.dressme.R
 import com.example.dressme.model.ItemModel
 import com.google.android.gms.tasks.OnFailureListener
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
@@ -50,34 +54,77 @@ class ItemsObjectAdapter: RecyclerView.Adapter<ItemsObjectAdapter.ViewHolder>() 
         val rating: TextView = itemView.findViewById(R.id.session_itemOneRating_text)
 
         fun bind(item: ItemModel) {
-            var bufferFile: File = File.createTempFile("img", "jpg")
+            var bufferFile1: File = File.createTempFile("img", "jpg")
+            var bufferFile2: File = File.createTempFile("img1", "jpg")
 
-            Log.d("DEBUG STRING", FirebaseStorage.getInstance().toString())
-            Log.d("DEBUG STRING", item.toString())
+            val storageRef: FirebaseStorage = FirebaseStorage.getInstance()
 
-            val dbRef: StorageReference = FirebaseStorage.getInstance().getReferenceFromUrl(
-                item.image_uri as String)
-
-            dbRef.getFile(bufferFile)
+            storageRef.getReferenceFromUrl(item.imageUri as String)
+                .getFile(bufferFile1)
                 .addOnSuccessListener {
                     Picasso.get()
-                        .load(bufferFile)
+                        .load(bufferFile1)
                         .placeholder(R.drawable.progress_animation)
                         .into(objectImage)
             }.addOnFailureListener(OnFailureListener {
                 })
 
-//            objectImage.setOnClickListener{
-//                val intent = Intent(context, InspectItemActivity::class.java)
-//                startActivity(intent);
-//            }
+            // TODO Refactor Queries
+            Log.d("SANDYBUG", item.sellerId.toString())
+            val task = FirebaseFirestore.getInstance().collection("sellers")
+                .whereEqualTo("sellerId", item.sellerId).get()
+
+            var sellerImageUri: String = ""
+            var sellerName: String = ""
+
+            task.addOnSuccessListener {
+                // TODO should be unique
+                val res = it.getDocuments().get(0)
+
+                sellerImageUri = res.get("profileImageUri") as String
+                sellerName = res.get("name") as String
+
+                seller.text = sellerName
+                storageRef.getReferenceFromUrl(sellerImageUri)
+                    .getFile(bufferFile2)
+                    .addOnSuccessListener {
+                        Picasso.get()
+                            .load(bufferFile2)
+                            .into(sellerImage)
+                    }.addOnFailureListener(OnFailureListener {
+                    })
+            }
+
+            objectImage.setOnClickListener{
+                var itemBundle: Bundle = prepareBundle(item, sellerImageUri, sellerName)
+
+                val con = itemView.context
+                val intent = Intent(con, InspectItemActivity::class.java)
+                intent.putExtra("item", itemBundle)
+                con.startActivity(intent);
+            }
 
             brand.text = item.brand
             price.text = item.price
 
             seller.text = "TristanDu92xXx"
-            info.text = "38 / 7.5"
-            rating.text = "10♥"
+            info.text = item.info //"38 / 7.5"
+            rating.text = item.rating + "♥"
+        }
+
+        // TODO pass query seamlessly
+        private fun prepareBundle(item: ItemModel, sellerImageUri: String, sellerName: String): Bundle {
+            var itemBundle: Bundle = Bundle()
+            itemBundle.putString("name", item.name)
+            itemBundle.putString("description", item.description)
+            itemBundle.putString("info", item.info)
+            itemBundle.putString("brand", item.brand)
+            itemBundle.putString("imageUri", item.imageUri)
+            itemBundle.putString("price", item.price)
+            itemBundle.putLong("sellerId", item.sellerId)
+            itemBundle.putString("sellerImageUri", sellerImageUri)
+            itemBundle.putString("seller", sellerName)
+            return itemBundle
         }
 
         companion object {
