@@ -28,4 +28,9 @@
         android:name="com.example.dressme.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
+    <activity
+        android:id="@+id/inspectItemActivity"
+        android:name="com.example.dressme.InspectItemActivity"
+        android:label="activity_inspect"
+        tools:layout="@layout/activity_inspect" />
 </navigation>

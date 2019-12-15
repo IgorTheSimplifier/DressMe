@@ -16,6 +16,11 @@
             android:name=".MainActivity"
             android:label="@string/label_appName"
             android:screenOrientation="portrait">
+
+
+        </activity>
+
+        <activity android:name=".SplashDialogActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

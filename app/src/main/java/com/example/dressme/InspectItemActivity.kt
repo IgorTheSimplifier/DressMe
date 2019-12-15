@@ -1,8 +1,11 @@
 package com.example.dressme
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
+import android.view.View
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -27,10 +30,22 @@ class InspectItemActivity : AppCompatActivity() {
         loadImages(bundle)
 
         seller_button.setOnClickListener({
-
+//            buttonActionPlaceholder()
         })
 
 
+    }
+
+    public fun buttonActionPlaceholder1(view: View) {
+        // TODO implement real action
+        val intent: Intent = Intent(view.context, SettingsActivity::class.java)
+        startActivity(intent)
+    }
+
+    public fun buttonActionPlaceholder2(view: View) {
+        // TODO implement real action
+        val intent: Intent = Intent(view.context, ProfileMainActivity::class.java)
+        startActivity(intent)
     }
 
     private fun loadImages(bundle: Bundle) {

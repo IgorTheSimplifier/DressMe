@@ -1,5 +1,6 @@
 package com.example.dressme.ui.session
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -30,6 +31,7 @@ class SessionFragment : Fragment() {
     private lateinit var mStorageRef: StorageReference
     private val DEBUG = "Sandybug"
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,20 +44,30 @@ class SessionFragment : Fragment() {
         sessionViewModel.text.observe(this, Observer {
         })
 
-        // TODO Implement Bindings
-//        val binding: FragmentSleepTrackerBinding = DataBindingUtil.inflate(
-//            inflater, R.layout.fragment_sleep_tracker, container, false)
-
-        mFirebaseRef = FirebaseFirestore.getInstance()
-        mStorageRef = FirebaseStorage.getInstance().getReference()
-        mItemRef = mFirebaseRef.collection("items")
+        initFirebase()
 
         /* Setting up the recycler with its reference, adapter and orientation. */
         val objectsRecycler : RecyclerView = root.findViewById<RecyclerView>(R.id.session_objectList_recycler)
-        val adapter = ItemsObjectAdapter()
 
-        objectsRecycler.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        val adapter = ItemsObjectAdapter()
         objectsRecycler.adapter = adapter
+        retrieveData(adapter)
+
+        finishRecycler(objectsRecycler)
+
+        return root
+    }
+
+    private fun initFirebase() {
+        mFirebaseRef = FirebaseFirestore.getInstance()
+        mStorageRef = FirebaseStorage.getInstance().getReference()
+        mItemRef = mFirebaseRef.collection("items")
+    }
+
+
+    private fun finishRecycler(objectsRecycler: RecyclerView) {
+        /* Horizontal */
+        objectsRecycler.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
         /* UX:  Recycler SnapHelper. */
         //val snapHelper : SnapHelperOneByOne = SnapHelperOneByOne()
@@ -71,10 +83,6 @@ class SessionFragment : Fragment() {
             HorizontalSpaceItemDecoration()
         objectsRecycler.addItemDecoration(dividerItemDecoration)
         objectsRecycler.addItemDecoration(horizontalSpaceItemDecoration)
-
-        retrieveData(adapter)
-
-        return root
     }
 
     private fun retrieveData(adapter: ItemsObjectAdapter) {

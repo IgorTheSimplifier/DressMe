@@ -105,13 +105,11 @@
             android:id="@+id/session_itemOneInfo_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
             android:background="@color/colorAccentThree"
             android:paddingStart="4dp"
             android:paddingEnd="4dp"
             android:text="38 / 7.5"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/session_itemOneRating_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/session_itemOneBrand_text" />
 
@@ -124,7 +122,6 @@
             android:paddingEnd="4dp"
             android:text="23 ♥"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/session_itemOneInfo_text"
             app:layout_constraintTop_toTopOf="@+id/session_itemOneInfo_text" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
