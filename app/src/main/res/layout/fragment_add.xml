@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipToPadding="true"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true">
 
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/add_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/image_view_add"
-        android:layout_width="199dp"
-        android:layout_height="202dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
+        app:layout_constraintTop_toTopOf="parent"/>
     <Button
         android:id="@+id/add_img_button_add"
         android:layout_width="wrap_content"
@@ -66,6 +72,81 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_desc_textview_add" />
 
+    <TextView
+        android:id="@+id/add_price_rent_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Renting price (per day)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_desc_edittext_add" />
+
+    <EditText
+        android:id="@+id/add_price_rent_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_price_rent_textview" />
+
+    <TextView
+        android:id="@+id/add_price_sell_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To buy price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_price_rent_edittext" />
+
+    <EditText
+        android:id="@+id/add_price_sell_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_price_sell_textview" />
+
+    <TextView
+        android:id="@+id/add_deposit_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deposit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_price_sell_edittext" />
+
+    <EditText
+        android:id="@+id/add_deposit_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_deposit_textview" />
+
+
+    <TextView
+        android:id="@+id/add_brand_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Brand"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_deposit_edittext" />
+
+    <Spinner
+        android:id="@+id/add_brand_dropdown"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_brand_textview"/>
+
     <Button
         android:id="@+id/confirm_button_add"
         android:layout_width="wrap_content"
@@ -73,6 +154,8 @@
         android:text="Confirm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_desc_edittext_add" />
-
+        app:layout_constraintTop_toBottomOf="@+id/add_brand_dropdown"
+        app:layout_constraintBottom_toBottomOf="@+id/add_layout"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
