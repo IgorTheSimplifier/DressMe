@@ -48,7 +48,7 @@
 
         <activity
             android:name=".ProfileMainActivity"
-            android:label="Session"
+            android:label="@string/label_session"
             android:screenOrientation="portrait">
 
         </activity>
