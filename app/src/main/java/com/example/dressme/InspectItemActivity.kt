@@ -22,15 +22,18 @@ class InspectItemActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
-
         val bundle: Bundle = getIntent().getBundleExtra("item")
-        Log.d("SANDYBUG", bundle.getString("imageUri"))
-        name_textView.text = bundle.getString("name")
-        info_textView.text = bundle.getString("info")
-        description_textView.text = bundle.getString("description")
-        price_textView.text = bundle.getString("price")
-        seller_button.text = bundle.getString("seller")
+        extractBundle(bundle)
+        loadImages(bundle)
 
+        seller_button.setOnClickListener({
+
+        })
+
+
+    }
+
+    private fun loadImages(bundle: Bundle) {
         var bufferFile1: File = File.createTempFile("img2", "jpg")
         var bufferFile2: File = File.createTempFile("img3", "jpg")
 
@@ -54,6 +57,14 @@ class InspectItemActivity : AppCompatActivity() {
                     .into(seller_image)
             }.addOnFailureListener(OnFailureListener {
             })
+    }
+
+    private fun extractBundle(bundle: Bundle) {
+        name_textView.text = bundle.getString("name")
+        info_textView.text = bundle.getString("info")
+        description_textView.text = bundle.getString("description")
+        price_textView.text = bundle.getString("price")
+        seller_button.text = bundle.getString("seller")
     }
 
     override fun onSupportNavigateUp(): Boolean {
