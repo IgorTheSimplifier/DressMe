@@ -12,13 +12,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dressme.R
+import com.example.dressme.models.Item
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
 
 class SessionFragment : Fragment() {
-
-    // $todo: add dynamic generation of marketplace items
-
     private lateinit var sessionViewModel: SessionViewModel;
+    private lateinit var mFirebaseRef: FirebaseFirestore
+    private lateinit var mItemRef: CollectionReference
+    private lateinit var mStorageRef: StorageReference
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,15 +40,30 @@ class SessionFragment : Fragment() {
         sessionViewModel.text.observe(this, Observer {
         })
 
-
-        // TODO Retrieve items via Firebase
+        initFirebase()
 
         /* Setting up the recycler with its reference, adapter and orientation. */
         val objectsRecycler : RecyclerView = root.findViewById<RecyclerView>(R.id.session_objectList_recycler)
-        val adapter = SalesObjectAdapter()
 
-        objectsRecycler.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        val adapter = ItemsObjectAdapter()
         objectsRecycler.adapter = adapter
+        retrieveData(adapter)
+
+        finishRecycler(objectsRecycler)
+
+        return root
+    }
+
+    private fun initFirebase() {
+        mFirebaseRef = FirebaseFirestore.getInstance()
+        mStorageRef = FirebaseStorage.getInstance().getReference()
+        mItemRef = mFirebaseRef.collection("items")
+    }
+
+
+    private fun finishRecycler(objectsRecycler: RecyclerView) {
+        /* Horizontal */
+        objectsRecycler.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
         /* UX:  Recycler SnapHelper. */
         //val snapHelper : SnapHelperOneByOne = SnapHelperOneByOne()
@@ -56,15 +79,36 @@ class SessionFragment : Fragment() {
             HorizontalSpaceItemDecoration()
         objectsRecycler.addItemDecoration(dividerItemDecoration)
         objectsRecycler.addItemDecoration(horizontalSpaceItemDecoration)
-
-        // TODO add interactive links
-
-        /*root.session_objectList_recycler.setOnClickListener{
-            //val intent = Intent(context, InspectItemActivity::class.java)
-            val intent = Intent(context, FirebaseActivity::class.java)
-            startActivity(intent);
-        }*/
-
-        return root
     }
+
+    private fun retrieveData(adapter: ItemsObjectAdapter) {
+        var task: Task<QuerySnapshot> = mItemRef.get()
+        task.addOnSuccessListener {
+            var queryRes: MutableList<DocumentSnapshot> = it.getDocuments()
+            var adapterData: MutableList<Item> = mutableListOf()
+            queryRes.shuffle()
+
+            for (snapshot: DocumentSnapshot in queryRes) {
+                val item: Item? = snapshot.toObject(Item::class.java)
+                if (item != null)
+                    adapterData.add(item)
+            }
+            adapterData.toList()
+            adapter.data = adapterData
+        }
+    }
+
+//    private fun snapshotToModel(doc: DocumentSnapshot): ItemModel {
+//        return ItemModel(
+//            0,
+//            doc.get("sellerId") as Long,
+//            doc.get("name") as String?,
+//            doc.get("brand") as String?,
+//            doc.get("description") as String?,
+//            doc.get("info") as String?,
+//            doc.get("price") as String?,
+//            doc.get("rating") as String?,
+//            doc.get("imageUri") as String?
+//        )
+//    }
 }

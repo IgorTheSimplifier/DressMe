@@ -10,32 +10,61 @@
     <!-- remove hardcoded shit and replace by constraints and percentage -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#FF1F1D1D">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="cursive"
+            android:text="DressMe"
+            android:textColor="#FFFFFFFF"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/session_customize_layout"
         style="@style/SuperStyle"
         android:layout_width="0dp"
-        android:layout_height="244dp"
+        android:layout_height="240dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:background="@color/colorForeground"
         android:theme="@style/DressMe"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/header">
 
         <TextView
             android:id="@+id/session_personalize_textView"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="64dp"
+            android:layout_marginBottom="52dp"
             android:background="@color/colorAccentThree"
             android:fontFamily="@font/roboto"
             android:text="@string/fragment_session_personalize"
             android:textAlignment="center"
-            android:textSize="18sp"
+            android:textSize="22sp"
             app:layout_constraintBottom_toTopOf="@+id/session_personalize_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="28dp"
             android:background="@color/colorButton"
             android:text="@string/button_customize"
             app:layout_constraintBottom_toBottomOf="parent"

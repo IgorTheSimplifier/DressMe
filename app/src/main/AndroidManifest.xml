@@ -6,15 +6,26 @@
 
     <application
         android:allowBackup="true"
-        android:label="@string/label_home"
+        android:label="@string/label_appName"
         android:supportsRtl="true"
+        android:icon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
 
         <!-- Pre App Activities -->
         <activity
             android:name=".MainActivity"
-            android:label="@string/label_home"
+            android:label="@string/label_appName"
             android:screenOrientation="portrait">
+
+
+        </activity>
+
+        <activity android:name=".SplashDialogActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
@@ -23,7 +34,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".SignInActivity"
-            android:screenOrientation="portrait" /> <!-- Profile, browsing and e-commerce -->
+            android:screenOrientation="portrait" />
         <activity
             android:name=".InspectItemActivity"
             android:screenOrientation="portrait" />
@@ -34,20 +45,12 @@
             android:name=".SettingsActivity"
             android:label="@string/label_settings"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".ProfileMainActivity"
-            android:label="@string/label_profile_main"
+            android:label="@string/label_session"
             android:screenOrientation="portrait">
 
-        </activity>
-
-        <activity
-            android:name=".sandbox.SnappingActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data
