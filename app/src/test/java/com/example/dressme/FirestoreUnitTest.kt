@@ -1,14 +1,10 @@
 package com.example.dressme
 
-import com.example.dressme.model.ItemModel
 import com.example.dressme.ui.session.ItemsObjectAdapter
-import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.Task
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.storage.FirebaseStorage
-import com.squareup.picasso.Picasso
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 
@@ -31,18 +27,18 @@ class FirestoreUnitTest {
         }
     }
 
-    @Test
-    private fun roundTripDatabase() {
-        val outbound = ItemModel(6, 66, null, null, null, null, null, null, null)
-        mItemsRef.add(outbound)
-
-        val inbound = FirebaseFirestore.getInstance().collection("items")
-            .whereEqualTo("sellerId", "66").get()
-        inbound.addOnSuccessListener {
-            val res = it.getDocuments().get(0)
-            assertEquals(666, (res.get("sellerId") as Int)*10 + res.get("usersId") as Int)
-        }
-    }
+//    @Test
+//    private fun roundTripDatabase() {
+//        val outbound = ItemModel(6, 66, null, null, null, null, null, null, null)
+//        mItemsRef.add(outbound)
+//
+//        val inbound = FirebaseFirestore.getInstance().collection("items")
+//            .whereEqualTo("sellerId", "66").get()
+//        inbound.addOnSuccessListener {
+//            val res = it.getDocuments().get(0)
+//            assertEquals(666, (res.get("sellerId") as Int)*10 + res.get("usersId") as Int)
+//        }
+//    }
 
     @Test
     private fun sellerUnicity() {

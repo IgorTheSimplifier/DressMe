@@ -1,14 +1,10 @@
 package com.example.dressme
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
-import android.util.Log
-import android.view.View
+import com.example.dressme.models.OwnerUser
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_inspect.*
 import java.io.File
@@ -28,33 +24,14 @@ class InspectItemActivity : AppCompatActivity() {
         val bundle: Bundle = getIntent().getBundleExtra("item")
         extractBundle(bundle)
         loadImages(bundle)
-
-        seller_button.setOnClickListener({
-//            buttonActionPlaceholder()
-        })
-
-
-    }
-
-    public fun buttonActionPlaceholder1(view: View) {
-        // TODO implement real action
-        val intent: Intent = Intent(view.context, SettingsActivity::class.java)
-        startActivity(intent)
-    }
-
-    public fun buttonActionPlaceholder2(view: View) {
-        // TODO implement real action
-        val intent: Intent = Intent(view.context, ProfileMainActivity::class.java)
-        startActivity(intent)
     }
 
     private fun loadImages(bundle: Bundle) {
         var bufferFile1: File = File.createTempFile("img2", "jpg")
         var bufferFile2: File = File.createTempFile("img3", "jpg")
-
         val firebaseRef: FirebaseStorage = FirebaseStorage.getInstance()
 
-        firebaseRef.getReferenceFromUrl(bundle.getString("imageUri"))
+        firebaseRef.getReferenceFromUrl(bundle.getString("imageUri")!!)
             .getFile(bufferFile1)
             .addOnSuccessListener {
                 Picasso.get()
@@ -64,22 +41,24 @@ class InspectItemActivity : AppCompatActivity() {
             }.addOnFailureListener(OnFailureListener {
             })
 
-        firebaseRef.getReferenceFromUrl(bundle.getString("sellerImageUri"))
-            .getFile(bufferFile2)
-            .addOnSuccessListener {
-                Picasso.get()
-                    .load(bufferFile2)
-                    .into(seller_image)
-            }.addOnFailureListener(OnFailureListener {
-            })
+        val ownerUser = bundle.getSerializable("owner_user") as OwnerUser
+        if (ownerUser.profile_image_uri!=null) {
+            firebaseRef.getReferenceFromUrl(ownerUser.profile_image_uri!!)
+                .getFile(bufferFile2)
+                .addOnSuccessListener {
+                    Picasso.get()
+                        .load(bufferFile2)
+                        .into(seller_image)
+                }.addOnFailureListener(OnFailureListener {
+                })
+        }
     }
 
     private fun extractBundle(bundle: Bundle) {
         name_textView.text = bundle.getString("name")
-        info_textView.text = bundle.getString("info")
         description_textView.text = bundle.getString("description")
-        price_textView.text = bundle.getString("price")
-        seller_button.text = bundle.getString("seller")
+        val ownerUser = bundle.getSerializable("owner_user") as OwnerUser
+        seller_button.text = ownerUser.name
     }
 
     override fun onSupportNavigateUp(): Boolean {

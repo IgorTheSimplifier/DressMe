@@ -2,6 +2,8 @@
     <!-- Action bar labels -->
     <string name="label_appName">DressMe</string>
     <string name="label_settings">Settings</string>
+    <string name="label_session">Session</string>
+
 
     <!-- Login -->
     <string name="prompt_email">Email</string>

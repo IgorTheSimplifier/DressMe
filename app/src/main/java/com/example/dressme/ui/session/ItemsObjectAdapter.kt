@@ -14,7 +14,7 @@ import com.example.dressme.AboutActivity
 import com.example.dressme.InspectItemActivity
 import com.example.dressme.ProfileMainActivity
 import com.example.dressme.R
-import com.example.dressme.model.ItemModel
+import com.example.dressme.models.Item
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -23,7 +23,7 @@ import com.squareup.picasso.Picasso
 import java.io.File
 
 class ItemsObjectAdapter: RecyclerView.Adapter<ItemsObjectAdapter.ViewHolder>() {
-    var data = listOf<ItemModel>()
+    var data = listOf<Item>()
     set(value) {
         field = value
         notifyDataSetChanged()
@@ -38,7 +38,7 @@ class ItemsObjectAdapter: RecyclerView.Adapter<ItemsObjectAdapter.ViewHolder>() 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item: ItemModel = data[position]
+        val item: Item = data[position]
         holder.bind(item)
     }
 
@@ -53,13 +53,13 @@ class ItemsObjectAdapter: RecyclerView.Adapter<ItemsObjectAdapter.ViewHolder>() 
         val price: TextView = itemView.findViewById(R.id.session_itemOnePrice_text)
         val rating: TextView = itemView.findViewById(R.id.session_itemOneRating_text)
 
-        fun bind(item: ItemModel) {
+        fun bind(item: Item) {
             var bufferFile1: File = File.createTempFile("img", "jpg")
             var bufferFile2: File = File.createTempFile("img1", "jpg")
 
             val storageRef: FirebaseStorage = FirebaseStorage.getInstance()
 
-            storageRef.getReferenceFromUrl(item.imageUri as String)
+            storageRef.getReferenceFromUrl(item.item_image_uri as String)
                 .getFile(bufferFile1)
                 .addOnSuccessListener {
                     Picasso.get()
@@ -70,20 +70,15 @@ class ItemsObjectAdapter: RecyclerView.Adapter<ItemsObjectAdapter.ViewHolder>() 
                 })
 
             // TODO Refactor Queries
-            Log.d("SANDYBUG", item.sellerId.toString())
-            val task = FirebaseFirestore.getInstance().collection("sellers")
-                .whereEqualTo("sellerId", item.sellerId).get()
+            Log.d("ItemsObjectAdapter", item.owner_user.toString())
+//            val task = FirebaseFirestore.getInstance().collection("sellers")
+//                .whereEqualTo("sellerId", item.sellerId).get()
 
-            var sellerImageUri: String = ""
-            var sellerName: String = ""
+            // TODO !! fix
+            val sellerImageUri = item.owner_user?.profile_image_uri
+            val sellerName = item.owner_user?.name
 
-            task.addOnSuccessListener {
-                // TODO should be unique
-                val res = it.getDocuments().get(0)
-
-                sellerImageUri = res.get("profileImageUri") as String
-                sellerName = res.get("name") as String
-
+            if (sellerImageUri != null) {
                 seller.text = sellerName
                 storageRef.getReferenceFromUrl(sellerImageUri)
                     .getFile(bufferFile2)
@@ -94,9 +89,26 @@ class ItemsObjectAdapter: RecyclerView.Adapter<ItemsObjectAdapter.ViewHolder>() 
                     }.addOnFailureListener(OnFailureListener {
                     })
             }
+//            task.addOnSuccessListener {
+//                // TODO should be unique
+//                val res = it.getDocuments().get(0)
+//
+//                sellerImageUri = res.get("profileImageUri") as String
+//                sellerName = res.get("name") as String
+//
+//                seller.text = sellerName
+//                storageRef.getReferenceFromUrl(sellerImageUri)
+//                    .getFile(bufferFile2)
+//                    .addOnSuccessListener {
+//                        Picasso.get()
+//                            .load(bufferFile2)
+//                            .into(sellerImage)
+//                    }.addOnFailureListener(OnFailureListener {
+//                    })
+//            }
 
             objectImage.setOnClickListener{
-                var itemBundle: Bundle = prepareBundle(item, sellerImageUri, sellerName)
+                var itemBundle: Bundle = prepareBundle(item)
 
                 val con = itemView.context
                 val intent = Intent(con, InspectItemActivity::class.java)
@@ -104,26 +116,31 @@ class ItemsObjectAdapter: RecyclerView.Adapter<ItemsObjectAdapter.ViewHolder>() 
                 con.startActivity(intent);
             }
 
-            brand.text = item.brand
-            price.text = item.price
+            // TODO uncomment and fix
+//            brand.text = item.brand
+//            price.text = item.price
 
-            seller.text = "TristanDu92xXx"
-            info.text = item.info //"38 / 7.5"
-            rating.text = item.rating + "♥"
+//            seller.text = "TristanDu92xXx"
+//            info.text = item.info //"38 / 7.5"
+//            rating.text = item.rating + "♥"
         }
 
         // TODO pass query seamlessly
-        private fun prepareBundle(item: ItemModel, sellerImageUri: String, sellerName: String): Bundle {
+        private fun prepareBundle(item: Item): Bundle {
             var itemBundle: Bundle = Bundle()
             itemBundle.putString("name", item.name)
-            itemBundle.putString("description", item.description)
-            itemBundle.putString("info", item.info)
-            itemBundle.putString("brand", item.brand)
-            itemBundle.putString("imageUri", item.imageUri)
-            itemBundle.putString("price", item.price)
-            itemBundle.putLong("sellerId", item.sellerId)
-            itemBundle.putString("sellerImageUri", sellerImageUri)
-            itemBundle.putString("seller", sellerName)
+            itemBundle.putString("description", item.desc_text)
+            itemBundle.putString("imageUri", item.item_image_uri)
+            itemBundle.putSerializable("owner_user", item.owner_user)
+//            itemBundle.putString("name", item.name)
+//            itemBundle.putString("description", item.description)
+//            itemBundle.putString("info", item.info)
+//            itemBundle.putString("brand", item.brand)
+//            itemBundle.putString("imageUri", item.imageUri)
+//            itemBundle.putString("price", item.price)
+//            itemBundle.putLong("sellerId", item.sellerId)
+//            itemBundle.putString("sellerImageUri", sellerImageUri)
+//            itemBundle.putString("seller", sellerName)
             return itemBundle
         }
 

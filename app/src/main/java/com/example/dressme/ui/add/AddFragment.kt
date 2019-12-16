@@ -130,7 +130,7 @@ class AddFragment : Fragment() {
         Log.d(TAG, "Uploading photo")
 
         val filename = UUID.randomUUID().toString()
-        val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
+        val ref = FirebaseStorage.getInstance().getReference("/items/$filename")
 
         // Uploading photo first
         ref.putFile(selectedPhotoUri)

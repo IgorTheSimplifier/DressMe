@@ -1,8 +1,6 @@
 package com.example.dressme.ui.session
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dressme.R
-import com.example.dressme.model.ItemModel
+import com.example.dressme.models.Item
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
@@ -29,8 +27,6 @@ class SessionFragment : Fragment() {
     private lateinit var mFirebaseRef: FirebaseFirestore
     private lateinit var mItemRef: CollectionReference
     private lateinit var mStorageRef: StorageReference
-    private val DEBUG = "Sandybug"
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -89,28 +85,30 @@ class SessionFragment : Fragment() {
         var task: Task<QuerySnapshot> = mItemRef.get()
         task.addOnSuccessListener {
             var queryRes: MutableList<DocumentSnapshot> = it.getDocuments()
-            var adapterData: MutableList<ItemModel> = mutableListOf()
+            var adapterData: MutableList<Item> = mutableListOf()
             queryRes.shuffle()
 
             for (snapshot: DocumentSnapshot in queryRes) {
-                adapterData.add(snapshotToModel(snapshot))
+                val item: Item? = snapshot.toObject(Item::class.java)
+                if (item != null)
+                    adapterData.add(item)
             }
             adapterData.toList()
             adapter.data = adapterData
         }
     }
 
-    private fun snapshotToModel(doc: DocumentSnapshot): ItemModel {
-        return ItemModel(
-            0,
-            doc.get("sellerId") as Long,
-            doc.get("name") as String?,
-            doc.get("brand") as String?,
-            doc.get("description") as String?,
-            doc.get("info") as String?,
-            doc.get("price") as String?,
-            doc.get("rating") as String?,
-            doc.get("imageUri") as String?
-        )
-    }
+//    private fun snapshotToModel(doc: DocumentSnapshot): ItemModel {
+//        return ItemModel(
+//            0,
+//            doc.get("sellerId") as Long,
+//            doc.get("name") as String?,
+//            doc.get("brand") as String?,
+//            doc.get("description") as String?,
+//            doc.get("info") as String?,
+//            doc.get("price") as String?,
+//            doc.get("rating") as String?,
+//            doc.get("imageUri") as String?
+//        )
+//    }
 }
