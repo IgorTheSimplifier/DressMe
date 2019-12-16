@@ -19,7 +19,7 @@ class InspectItemActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inspect)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val bundle: Bundle = getIntent().getBundleExtra("item")
         extractBundle(bundle)
